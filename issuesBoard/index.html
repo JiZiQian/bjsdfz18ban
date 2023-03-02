@@ -4,6 +4,17 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
+	<script>
+		function onSubmit(){
+			let text=document.getElementById("text").innerHTML;
+			let ajaxPost;
+			if(window.XMLHttpRequest) ajaxPost=new XMLHttpRequest();
+			else ajaxPost=new ActiveXObject("Microsoft.XMLHTTP");
+			ajaxPost.open("POST","http://localhost:1801",false);
+			ajaxPost.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			ajaxPost.send("text="+text);
+		}
+	</script>
 </head>
 <body>
 	<div class="head">
@@ -13,10 +24,8 @@
 		
 	</div>
 	<div style="float:right;width:38%" class="submit">
-		<form action="http://172.16.44.106:1801" method="post" target="_self">
-			留言内容:<input type="text" name="Document" value="此处输入留言内容">
-			<input type="submit" value="提交">
-		</form>
+		留言内容:<textarea id="text" placeholder="此处输入留言内容">
+		<button type="button" onclick="onSubmit()">提交</button>
 	</div>
 </body>
 </html>
