@@ -5,14 +5,22 @@
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
 	<script>
+		//init
+		let texts;
+		let ajaxAsk;
+		if(window.XMLHttpRequest) ajaxAsk=new XMLHttpRequest();
+		else ajaxAsk=new ActiveXObject("Microsoft.XMLHTTP");
+		texts=ajaxAsk.responseText;
+		document.getElementById("texts").innerHTML=texts;
+		
 		function onSubmit(){
 			let text=document.getElementById("text").innerHTML;
-			let ajaxPost;
-			if(window.XMLHttpRequest) ajaxPost=new XMLHttpRequest();
-			else ajaxPost=new ActiveXObject("Microsoft.XMLHTTP");
-			ajaxPost.open("POST","http://localhost:1801",false);
-			ajaxPost.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			ajaxPost.send("text="+text);
+			let ajaxSub;
+			if(window.XMLHttpRequest) ajaxSub=new XMLHttpRequest();
+			else ajaxSub=new ActiveXObject("Microsoft.XMLHTTP");
+			ajaxSub.open("POST","http://localhost:1801",false);
+			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			ajaxSub.send("text="+text);
 		}
 	</script>
 </head>
@@ -20,11 +28,9 @@
 	<div class="head">
 		<h1>表白墙（留言板）</h1>
 	</div>
-	<div class="texts">
-		
-	</div>
+	<div id="texts"></div>
 	<div style="float:right;width:38%" class="submit">
-		留言内容:<textarea id="text" placeholder="此处输入留言内容">
+		留言内容:<textarea id="text" placeholder="此处输入留言内容"></textarea>
 		<button type="button" onclick="onSubmit()">提交</button>
 	</div>
 </body>
