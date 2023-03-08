@@ -20,6 +20,7 @@
 			ajaxSub.open("POST","http://localhost:1801",false);
 			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			ajaxSub.send("text="+text);
+			document.getElementById("text").innerHTML="";
 		}
 	</script>
 </head>
