@@ -10,7 +10,10 @@ http.createServer(function(req,res){
     req.on("end",function(){
         post=querystring.parse(post);
         console.log(post.text);
-        var data=fs.readFileSync("issues.txt").toString()+post.text+"\n";
+        var data=fs.readFileSync("issues.txt").toString();
+        if(data.indexOf(post.text)){
+            data=data+post.text+"\n";
+        }
         fs.writeFile("issues.txt",data,function(err){
             if(err) return console.error(err);
         });
