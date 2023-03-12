@@ -15,7 +15,6 @@ http.createServer(function(req,res){
             if(err) return console.error(err);
         });
         res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
-        res.write(fs.readFileSync("index.html").toString());
         res.end();
     });
 }).listen(1801);//issue board
