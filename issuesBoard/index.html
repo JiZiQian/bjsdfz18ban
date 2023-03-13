@@ -10,8 +10,15 @@
 		let ajaxAsk;
 		if(window.XMLHttpRequest) ajaxAsk=new XMLHttpRequest();
 		else ajaxAsk=new ActiveXObject("Microsoft.XMLHTTP");
-		texts=ajaxAsk.responseText;
-		document.getElementById("texts").innerHTML=texts;
+		ajaxAsk.onreadystatechange=function(){
+			if(ajaxAsk.readyState==4&&ajaxAsk.status==200){
+				texts=ajaxAsk.responseText;
+				document.getElementById("texts").innerHTML=texts;
+			}
+		}
+		ajaxSub.open("POST",httpBackEnd,true);
+		ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		ajaxSub.send("type=getIssues");
 		
 		function onSubmit(){
 			let text=document.getElementById("text").value;
@@ -21,7 +28,7 @@
 			ajaxSub.onreadystatechange=function(){}
 			ajaxSub.open("POST",httpBackEnd,true);
 			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			ajaxSub.send("text="+text);
+			ajaxSub.send("text="+text+"&type=upload");
 			document.getElementById("text").value="";
 		}
 	</script>

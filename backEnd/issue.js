@@ -9,15 +9,22 @@ http.createServer(function(req,res){
     });
     req.on("end",function(){
         post=querystring.parse(post);
-        console.log(post.text);
-        var data=fs.readFileSync("issues.txt").toString();
-        if(data.indexOf(post.text)){
-            data=data+post.text+"\n";
-        }
-        fs.writeFile("issues.txt",data,function(err){
-            if(err) return console.error(err);
-        });
         res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+        if(post.type=="upload"){
+            console.log(post.text);
+            var data=fs.readFileSync("issues.txt").toString();
+            if(data.indexOf(post.text)){
+                data=data+post.text+"\n\n";
+            }
+            fs.writeFile("issues.txt",data,function(err){
+                if(err) return console.error(err);
+            });
+        }
+        if(post.type=="getIssues"){
+            console.log("getIssues");
+            var data=fs.readFileSync("issues.txt").toString();
+            res.write(data);
+        }
         res.end();
     });
 }).listen(1801);//issue board
