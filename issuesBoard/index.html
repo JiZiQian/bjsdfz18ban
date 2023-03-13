@@ -40,9 +40,9 @@
 				document.getElementById("texts").innerHTML=texts;
 			}
 		}
-		ajaxSub.open("POST",httpBackEnd,true);
-		ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		ajaxSub.send("type=getIssues");
+		ajaxAsk.open("POST",httpBackEnd,true);
+		ajaxAsk.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		ajaxAsk.send("type=getIssues");
 	</script>
 </body>
 </html>
