@@ -6,20 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
 	<script src="https://jiziqian.github.io/neiwangyun/1801.js"></script>
 	<script>
-		let texts;
-		let ajaxAsk;
-		if(window.XMLHttpRequest) ajaxAsk=new XMLHttpRequest();
-		else ajaxAsk=new ActiveXObject("Microsoft.XMLHTTP");
-		ajaxAsk.onreadystatechange=function(){
-			if(ajaxAsk.readyState==4&&ajaxAsk.status==200){
-				texts=ajaxAsk.responseText;
-				document.getElementById("texts").innerHTML=texts;
-			}
-		}
-		ajaxSub.open("POST",httpBackEnd,true);
-		ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		ajaxSub.send("type=getIssues");
-		
 		function onSubmit(){
 			let text=document.getElementById("text").value;
 			let ajaxSub;
@@ -43,5 +29,20 @@
 		<textarea id="text" placeholder="此处输入留言内容" style="width:95%" onscroll="this.rows++;"></textarea><br/>
 		<button type="button" onclick="onSubmit()">提交</button>
 	</div>
+	<script>
+		let texts;
+		let ajaxAsk;
+		if(window.XMLHttpRequest) ajaxAsk=new XMLHttpRequest();
+		else ajaxAsk=new ActiveXObject("Microsoft.XMLHTTP");
+		ajaxAsk.onreadystatechange=function(){
+			if(ajaxAsk.readyState==4&&ajaxAsk.status==200){
+				texts=ajaxAsk.responseText;
+				document.getElementById("texts").innerHTML=texts;
+			}
+		}
+		ajaxSub.open("POST",httpBackEnd,true);
+		ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		ajaxSub.send("type=getIssues");
+	</script>
 </body>
 </html>
