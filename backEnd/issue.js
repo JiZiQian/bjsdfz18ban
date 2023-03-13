@@ -24,6 +24,7 @@ http.createServer(function(req,res){
         if(post.type=="getIssues"){
             console.log("getIssues");
             var data=fs.readFileSync("issues.txt").toString();
+            console.log(data);
             res.end(data);
         }
     });
