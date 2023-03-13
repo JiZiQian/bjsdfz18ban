@@ -19,13 +19,13 @@ http.createServer(function(req,res){
             fs.writeFile("issues.txt",data,function(err){
                 if(err) return console.error(err);
             });
+            res.end();
         }
         if(post.type=="getIssues"){
             console.log("getIssues");
             var data=fs.readFileSync("issues.txt").toString();
-            res.write(data);
+            res.end(data);
         }
-        res.end();
     });
 }).listen(1801);//issue board
 console.log("Server is completed!");
