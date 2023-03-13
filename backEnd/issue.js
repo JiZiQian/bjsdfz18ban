@@ -9,7 +9,7 @@ http.createServer(function(req,res){
     });
     req.on("end",function(){
         post=querystring.parse(post);
-        res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+        res.writeHead(200,{"Content-Type":"text/html;charset=utf-8","Access-Control-Allow-Origin":"*"});
         if(post.type=="upload"){
             console.log(post.text);
             var data=fs.readFileSync("issues.txt").toString();
