@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>留言板</title>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
+	<script src="https://jiziqian.github.io/neiwangyun/1801.js"></script>
 	<script>
 		let texts;
 		let ajaxAsk;
@@ -18,7 +19,7 @@
 			if(window.XMLHttpRequest) ajaxSub=new XMLHttpRequest();
 			else ajaxSub=new ActiveXObject("Microsoft.XMLHTTP");
 			ajaxSub.onreadystatechange=function(){}
-			ajaxSub.open("POST","http://localhost:1801",true);
+			ajaxSub.open("POST",httpBackEnd,true);
 			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			ajaxSub.send("text="+text);
 			document.getElementById("text").value="";
