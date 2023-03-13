@@ -14,7 +14,7 @@ http.createServer(function(req,res){
             console.log(post.text);
             var data=fs.readFileSync("issues.txt").toString();
             if(data.indexOf(post.text)){
-                data=data+post.text+"\n\n";
+                data=data+post.text+"<br/><br/>";
             }
             fs.writeFile("issues.txt",data,function(err){
                 if(err) return console.error(err);
