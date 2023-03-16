@@ -11,19 +11,20 @@ http.createServer(function(req,res){
         post=querystring.parse(post);
         res.writeHead(200,{"Content-Type":"text/html;charset=utf-8","Access-Control-Allow-Origin":"*"});
         if(post.type=="upload"){
-            console.log(post.text);
             var data=fs.readFileSync("issues.txt").toString();
             var str=post.text;
-            while(str.indexOf("<")){
+            console.log(str);
+            while(str.indexOf("<")!=-1){
                 str=str.substr(0,str.indexOf("<"))+"&lt;"+str.substr(str.indexOf("<")+1);
             }
-            while(str.indexOf(">")){
+            while(str.indexOf(">")!=-1){
                 str=str.substr(0,str.indexOf(">"))+"&gt;"+str.substr(str.indexOf(">")+1);
             }
-            while(str.indexOf("\n")){
+            while(str.indexOf("\n")!=-1){
                 str=str.substr(0,str.indexOf("\n"))+"<br/>"+str.substr(str.indexOf("\n")+1);
             }
-            if(data.indexOf(str)){
+            console.log(str);
+            if(data.indexOf(str)==-1){
                 data=data+str+"<br/><br/>";
             }
             fs.writeFile("issues.txt",data,function(err){
