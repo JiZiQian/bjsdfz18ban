@@ -4,8 +4,19 @@
 	<meta charset="UTF-8">
 	<title>留言板</title>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
-	<script src="https://jiziqian.github.io/neiwangyun/1801.js"></script>
 	<script>
+		let httpBackEnd;
+		let ajaxHttp;
+		if(window.XMLHttpRequest) ajaxHttp=new XMLHttpRequest();
+		else ajaxHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		ajaxHttp.onreadystatechange=function(){
+			if(ajaxHttp.readyState=4&&ajaxHttp.status=200){
+				httpBackEnd=ajaxAsk.responseText;
+			}
+		}
+		ajaxHttp.open("POST","https://bjsdfz17ban.github.io/domain/18666.txt",true);
+		ajaxHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		ajaxHttp.send("");
 		function onSubmit(){
 			let text=document.getElementById("text").value;
 			let ajaxSub;
