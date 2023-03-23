@@ -4,8 +4,11 @@
 	<meta charset="UTF-8">
 	<title>留言板</title>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
-	<script src="https://jiziqian.github.io/neiwangyun/1801.js"></script>
 	<script>
+		let httpBackEnd;
+		function init(){
+			httpBackEnd="http://localhost:1801";
+		}
 		function onSubmit(){
 			let text=document.getElementById("text").value;
 			let ajaxSub;
@@ -23,13 +26,14 @@
 	<div class="head">
 		<h1>留言板</h1>
 	</div>
-	<div id="texts" style="background-color:#f1f1f1;float:left;position:absolute;right:38%;border:10px solid #ffffff;padding:1%;border-radius:25px;text-align:left"></div>
+	<div id="texts" style="float:left;position:absolute;left:0%;right:38%;"></div>
 	<div style="float:right;width:38%" class="submit">
 		留言内容:<br/>
 		<textarea id="text" placeholder="此处输入留言内容" style="width:95%" onscroll="this.rows++;"></textarea><br/>
 		<button type="button" onclick="onSubmit()">提交</button>
 	</div>
 	<script>
+		init();
 		let texts;
 		let ajaxAsk;
 		if(window.XMLHttpRequest) ajaxAsk=new XMLHttpRequest();
