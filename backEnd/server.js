@@ -2,7 +2,7 @@ var http=require("http");
 var querystring = require('querystring');
 var fs=require("fs");
 var mysql=require("./MySQLCURD");
-mysql.init('localhost','root','jzq20100505','IssuesBoard');
+mysql.init('127.0.0.1','root','','IssuesBoard');
 function replace(str,fd,to){
     while(str.indexOf(fd)!=-1){
         str=str.substr(0,str.indexOf(fd))+to+str.substr(str.indexOf(fd)+fd.length);
@@ -44,11 +44,11 @@ http.createServer(function(req,res){
                     return;
                 }
                 for(var i=0;i<result.length;i++){
-                    data+='<div id=\"texts\" style=\"background-color:#f1f1f1;border:10px solid #ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>'
+                    data+='<div id=\"texts\" style=\"background-color:#f1f1f1;border-width:10px 10px 0px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>'
                 }
                 res.end(data);
             })
         }
     });
-}).listen(1801);//issue board
+}).listen(18666);//issue board
 console.log("Server is completed!");
