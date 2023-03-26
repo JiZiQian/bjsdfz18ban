@@ -23,8 +23,9 @@
 			ajaxSub.onreadystatechange=function(){}
 			ajaxSub.open("POST",httpBackEnd,true);
 			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			ajaxSub.send("text="+text+"&type=upload");
+			ajaxSub.send("text="+text+"&type=upload&mode=issue");
 			document.getElementById("text").value="";
+			document.getElementById("text").rows=2;
 		}
 	</script>
 </head>
@@ -52,7 +53,7 @@
 		}
 		ajaxAsk.open("POST",httpBackEnd,true);
 		ajaxAsk.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		ajaxAsk.send("type=getIssues");
+		ajaxAsk.send("type=getIssues&mode=issue");
 	</script>
 </body>
 </html>
