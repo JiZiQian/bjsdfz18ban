@@ -20,8 +20,9 @@ http.createServer(function(req,res){
             mysql.init('127.0.0.1','root','','IssuesBoard');
             if(post.type=="upload"){
                 var issue=require("./issue");
-                issue.init('localhost','root','jzq20100505','IssuesBoard');
+                issue.init('127.0.0.1','root','','IssuesBoard');
                 res=issue.upload(post,res,replace);
+                issue.close();
                 res.end();
             }
             if(post.type=="getIssues"){

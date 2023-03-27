@@ -20,3 +20,6 @@ exports.upload=function(post,res,replace){
     });
     return res;
 };
+exports.close=function(){
+    mysql.close();
+}

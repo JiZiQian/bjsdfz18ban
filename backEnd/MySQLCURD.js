@@ -18,3 +18,6 @@ exports.update=function(table,content,where,callback){
 exports.delete=function(table,where,callback){
     connection.query('DELETE '+table+' '+where,callback);
 };
+exports.close=function(){
+    connection.end();
+}
