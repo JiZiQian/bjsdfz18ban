@@ -25,11 +25,12 @@
 			$(document).ready(function(){
 				$("#introduction").css("height","0px");
 				while(true){
+					console.log("adding height");
 					$("#introduction").scrollTop(100);
 					if(Number($("#introduction").scrollTop())==0){
 						break;
 					}
-					$("#introduction").css("height",Number($("#introduction").css("height"))+1);
+					$("#introduction").css("height",Number($("#introduction").css("height"))+1+"px");
 				}
 			});
 		</script>
