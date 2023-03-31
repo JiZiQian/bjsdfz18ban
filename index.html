@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<title>北京师范大学附属中学初中2025毕业级18班官网</title>
 		<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
-		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	</head>
 	<body>
 		<div class="head">
@@ -15,24 +14,20 @@
 			<a href="https://jiziqian.github.io/random" target="_blank">生成随机数</a>
 			<a href="https://jiziqian.github.io/bjsdfz18ban/issuesBoard" target="_blank">留言板</a>
 		</div>
-		<embed src="https://jiziqian.github.io/bjsdfz18ban/introduction" id="introduction" style="width: 100%;"></embed>
+		<div id="introduction" style="width: 100%;"></div>
 		<div class="tail">
 			<h2>友情链接</h2>
 			<a href="https://bjsdfz17ban.github.io" target="_blank">17班官网</a><br/>
 			<a href="https://bjsdfz5ban.top">5班官网</a>
 		</div>
 		<script>
-			$(document).ready(function(){
-				$("#introduction").css("height","10px");
-				while(true){
-					console.log("adding height");
-					$("#introduction").scrollTop(100);
-					if(Number($("#introduction").scrollTop())==0){
-						break;
-					}
-					$("#introduction").css("height",Number($("#introduction").css("height"))+1+"px");
-				}
-			});
+			let ajaxHttp;
+			if(window.XMLHttpRequest) ajaxHttp=new XMLHttpRequest();
+			else ajaxHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			ajaxHttp.open("GET","https://jiziqian.github.io/bjsdfz18ban/introduction?t="+Math.random(),false);
+			ajaxHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			ajaxHttp.send();
+			document.getElementById("introduction").innerHTML=ajaxHttp.responseText;
 		</script>
 	</body>
 </html>
