@@ -18,7 +18,7 @@ http.createServer(function(req,res){
         if(post.mode=="issue"){
             if(post.type=="upload"){
                 var issue=require("./issue");
-                issue.init('127.0.0.1','root','','IssuesBoard');
+                issue.init('127.0.0.1','root','','Server18');
                 res=issue.upload(post,res,replace);
                 issue.close();
                 res.end();
@@ -26,7 +26,7 @@ http.createServer(function(req,res){
             if(post.type=="getIssues"){
                 console.log("getIssues");
                 var mysql=require("./MySQLCURD");
-                mysql.init('127.0.0.1','root','','IssuesBoard');
+                mysql.init('127.0.0.1','root','','Server18');
                 var data="";
                 var x=mysql.query('Issues','',function(err,result){
                     if(err){
