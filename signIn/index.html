@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        .signIn{
+            background-color: #f1f1f1;
+            border: 2px solid #f1f1f1;
+            border-radius: 10px;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+        .signIn button{
+            display: block;
+            margin: auto;
+        }
+    </style>
+	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
+    <script>
+        function signIn(){
+            init();
+            let user=document.getElementById("user").value;
+            let pswd=document.getElementById("pswd").value;
+            let ajax;
+            if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
+			else ajax=new ActiveXObject("Microsoft.XMLHTTP");
+            ajax.open("POST",httpBackEnd,false);
+            ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            ajax.send("mode=users&type=signIn&user="+user+"&password="+pswd);
+            document.write(ajax.responseText);
+        }
+    </script>
+</head>
+<body>
+    <div class="signIn">
+        用户名：<input type="text" id="user"><br/><br/>
+        密码：<input type="password" id="pswd"><br/><br/>
+        <button type="button" onclick="signIn()">登录</button>
+    </div>
+</body>
+</html>
