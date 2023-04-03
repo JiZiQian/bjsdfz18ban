@@ -1,6 +1,7 @@
 var http=require("http");
 var querystring = require('querystring');
-var fs=require("fs");
+const { markAsUntransferable } = require("worker_threads");
+const { isTypedArray } = require("util/types");
 function replace(str,fd,to){
     while(str.indexOf(fd)!=-1){
         str=str.substr(0,str.indexOf(fd))+to+str.substr(str.indexOf(fd)+fd.length);
@@ -41,6 +42,42 @@ http.createServer(function(req,res){
                 });
             }
         }
+        else if(post.mode=="users"){
+            var mysql=require("./MySQLCURD");
+            mysql.init('127.0.0.1','root','','Server18');
+            if(post.type=="signUp"){
+                mysql.query('Users','WHERE user=\"'+post.user+'\"',function(err,result){
+                    console.log(result);
+                    if(err||!result.length){
+                        mysql.insert('Users','id,user,pswd','0,\"'+post.user+'\",\"'+post.password+'\"',function(err,result2){
+                            if(err){
+                                console.log("error "+err.message);
+                                return;
+                            }
+                            res.end("注册成功！");
+                            mysql.close();
+                        });
+                    }
+                    else{
+                        res.end("失败：用户已存在");
+                    }
+                });
+            }
+            if(post.type=="signIn"){
+                mysql.query('Users','WHERE user=\"'+post.user+'\" AND pswd=\"'+post.password+'\"',function(err,result){
+                    console.log(result);
+                    if(err||!result.length){
+                        res.end("-1");
+                    }
+                    else{
+                        res.end(result[0].id+" "+result[0].user);
+                    }
+                })
+            }
+        }
+        else{
+            res.end();
+        }
     });
-}).listen(18666);//issue board
+}).listen(18666);
 console.log("Server is completed!");
