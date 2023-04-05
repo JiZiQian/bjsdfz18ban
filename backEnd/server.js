@@ -29,15 +29,24 @@ http.createServer(function(req,res){
                 var mysql=require("./MySQLCURD");
                 mysql.init('127.0.0.1','root','','Server18');
                 var data="";
-                var x=mysql.query('Issues','',function(err,result){
+                var x=mysql.query('Issues','',async function(err,result){
                     if(err){
                         console.log("error "+err.message);
                         return;
                     }
                     for(var i=0;i<result.length;i++){
-                        mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
-                            data+=result2[0].user+':<br/>';
-                            data+='<div id=\"texts\" style=\"background-color:#f1f1f1;border-width:10px 10px 0px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                        console.log(i);
+                        console.log(result);
+                        console.log(result[i]);
+                        await new Promise(function(r){
+                            mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
+                                console.log(i);
+                                console.log(result);
+                                console.log(result[i]);
+                                data+=result2[0].user+':<br/>';
+                                data+='<div id=\"texts\" style=\"background-color:#f1f1f1;border-width:10px 10px 0px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                                r(result2);
+                            });
                         });
                     }
                     res.end(data);
