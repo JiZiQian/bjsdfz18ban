@@ -7,6 +7,7 @@ exports.upload=function(post,res,replace){
     console.log("upload");
     str=replace(str,"<","&lt;");
     str=replace(str,">","&gt;");
+    str=replace(str,"\n","<br/>");
     str=replace(str,"\'","&#39;");
     str=replace(str,"\"","&quot;");
     console.log(str);
