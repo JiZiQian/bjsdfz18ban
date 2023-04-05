@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        .signUp{
+            background-color: #f1f1f1;
+            border: 2px solid #f1f1f1;
+            border-radius: 10px;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+        .signUp button{
+            display: block;
+            margin: auto;
+        }
+    </style>
+	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
+    <script>
+        function signUp(){
+            init();
+            let user=document.getElementById("user").value;
+            let pswd=document.getElementById("pswd").value;
+            let pswd2=document.getElementById("pswd2").value;
+            let ajax;
+            if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
+			else ajax=new ActiveXObject("Microsoft.XMLHTTP");
+            if(pswd!=pswd2) return;
+            ajax.open("POST",httpBackEnd,false);
+            ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            ajax.send("mode=users&type=signUp&user="+user+"&password="+pswd);
+            res=ajax.responseText;
+            document.getElementById("signUp").innerHTML=res;
+            setTimeout(function(){
+                window.location.assign("https://jiziqian.github.io/bjsdfz18ban/signIn");
+            },3000);
+        }
+    </script>
+</head>
+<body>
+    <div class="signUp" id="signUp">
+        用户名：<input type="text" id="user"><br/><br/>
+        密码：<input type="password" id="pswd"><br/><br/>
+        请再次输入密码：<input type="password" id="pswd2"><br/><br/>
+        <button type="button" onclick="signUp()">注册</button>
+    </div>
+</body>
+</html>

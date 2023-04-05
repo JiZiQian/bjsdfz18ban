@@ -13,7 +13,7 @@ function userInit(){
     let ckie=document.cookie.split(";");
     console.log(ckie);
     if(ckie.length==0){
-        document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\"></a>";
+        document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\">登录</a>";
     }
     else{
         document.getElementById("user").innerHTML="<p id=\"userName\" onmouseover=\"show();\"></p><button onmouseout=\"hide()\" class=\"logOut\" id=\"logOut\" onclick=\"logOut()\">登出</button>";
