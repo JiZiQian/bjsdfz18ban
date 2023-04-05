@@ -31,7 +31,10 @@
             let ajax;
             if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
 			else ajax=new ActiveXObject("Microsoft.XMLHTTP");
-            if(pswd!=pswd2) return;
+            if(pswd!=pswd2){
+                alert("您两次输入的密码不一致！");
+                return;
+            }
             ajax.open("POST",httpBackEnd,false);
             ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             ajax.send("mode=users&type=signUp&user="+user+"&password="+pswd);

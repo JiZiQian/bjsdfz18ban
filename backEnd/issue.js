@@ -11,7 +11,7 @@ exports.upload=function(post,res,replace){
     str=replace(str,"\'","&#39;");
     str=replace(str,"\"","&quot;");
     console.log(str);
-    mysql.insert('Issues','id,issue','0,\"'+str+'\"',function(err,res){
+    mysql.insert('Issues','id,issue,userid','0,\"'+str+'\",'+post.userid,function(err,res){
         if(err){
             console.log("error "+err.message);
             return;

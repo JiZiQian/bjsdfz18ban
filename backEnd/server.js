@@ -35,7 +35,10 @@ http.createServer(function(req,res){
                         return;
                     }
                     for(var i=0;i<result.length;i++){
-                        data+='<div id=\"texts\" style=\"background-color:#f1f1f1;border-width:10px 10px 0px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>'
+                        mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
+                            data+=result2[0].user+':';
+                            data+='<div id=\"texts\" style=\"background-color:#f1f1f1;border-width:10px 10px 0px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                        });
                     }
                     res.end(data);
                     mysql.close();
