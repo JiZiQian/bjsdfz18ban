@@ -50,11 +50,13 @@
             let add=";expires="+d.toGMTString()+";path=/"
             document.cookie="User="+res.substr(res.indexOf(" ")+1)+add;
             document.cookie="uid="+res.substr(0,res.indexOf(" "))+add;
+            window.history.back();
         }
         function checkN(){
             let add=";path=/"
             document.cookie="User="+res.substr(res.indexOf(" ")+1)+add;
             document.cookie="uid="+res.substr(0,res.indexOf(" "))+add;
+            window.history.back();
         }
     </script>
 </head>
