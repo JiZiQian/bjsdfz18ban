@@ -3,6 +3,7 @@ function show(){
 }
 function hide(){
     document.getElementById("user").innerHTML="<h3 id=\"userName\" onmouseover=\"show()\"></h3>";
+    document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
 }
 function logOut(){
     document.cookie="User=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
@@ -17,6 +18,5 @@ function userInit(){
     }
     else{
         hide();
-        document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
     }
 }
