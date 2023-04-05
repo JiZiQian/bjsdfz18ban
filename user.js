@@ -2,6 +2,7 @@ function show(){
     document.getElementById("logOut").style.visibility="visible";
 }
 function hide(){
+    if(isOn=1) return;
     document.getElementById("logOut").style.visibility="hidden";
 }
 function logOut(){
@@ -16,7 +17,7 @@ function userInit(){
         document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\">登录</a>";
     }
     else{
-        document.getElementById("user").innerHTML="<p id=\"userName\" onmouseover=\"show();\"></p><button onmouseout=\"hide()\" class=\"logOut\" id=\"logOut\" onclick=\"logOut()\">登出</button>";
+        document.getElementById("user").innerHTML="<p id=\"userName\" onmouseover=\"show();\" onmouseout=\"hide();\"></p><button class=\"logOut\" id=\"logOut\" onclick=\"logOut()\" onmouseover=\"isOn=1;\" onmouseout=\"isOn=0;\">登出</button>";
         hide();
         document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
     }
