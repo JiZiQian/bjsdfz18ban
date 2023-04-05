@@ -27,5 +27,6 @@ function userInit(){
         document.getElementById("user").innerHTML="<p id=\"userName\" onmouseover=\"show()\" onmouseout=\"hide()\"></p><button class=\"logOut\" id=\"logOut\" onclick=\"logOut()\" onmouseover=\"show2()\" onmouseout=\"hide2()\">登出</button>";
         hide();
         document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
+        document.getElementById("logOut").style.top=document.getElementById("userName").clientHeight+"px";
     }
 }
