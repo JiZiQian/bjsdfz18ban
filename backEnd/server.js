@@ -3,8 +3,11 @@ var querystring = require('querystring');
 const { markAsUntransferable } = require("worker_threads");
 const { isTypedArray } = require("util/types");
 function replace(str,fd,to){
-    while(str.indexOf(fd)!=-1){
-        str=str.substr(0,str.indexOf(fd))+to+str.substr(str.indexOf(fd)+fd.length);
+    let i=0;
+    while(str.indexOf(fd,i)!=-1){
+        let t=str.indexOf(fd,i)+to.length;
+        str=str.substr(0,str.indexOf(fd,i))+to+str.substr(str.indexOf(fd,i)+fd.length);
+        i=t;
     }
     return str;
 }
