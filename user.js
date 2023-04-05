@@ -7,6 +7,7 @@ function hide(){
 function logOut(){
     document.cookie="User=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
     document.cookie="uid=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    window.location.reload();
 }
 let ckie=document.cookie.split(";");
 console.log(ckie);
