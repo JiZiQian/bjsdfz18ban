@@ -28,6 +28,8 @@
 			ajaxHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			ajaxHttp.send();
 			document.getElementById("introduction").innerHTML=ajaxHttp.responseText;
+			let ckie=document.cookie.split(";");
+			console.log(ckie);
 		</script>
 	</body>
 </html>

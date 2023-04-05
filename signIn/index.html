@@ -23,6 +23,7 @@
     </style>
 	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
     <script>
+        let res;
         function signIn(){
             init();
             let user=document.getElementById("user").value;
@@ -33,15 +34,33 @@
             ajax.open("POST",httpBackEnd,false);
             ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             ajax.send("mode=users&type=signIn&user="+user+"&password="+pswd);
-            document.write(ajax.responseText);
+            res=ajax.responseText;
+            console.log(res);
+            if(res=="-1"){
+                alert("账号或密码不正确！");
+            }
+            else{
+                let check="<p>是否保存账号和密码一个月？这样在一个月内您就不必重新登录了</p><br/><button type=\"button\" onclick=\"checkY()\">是</button><button type=\"button\" onclick=\"checkN()\">否</button>";
+                document.getElementById("signIn").innerHTML=check;
+            }
+        }
+        function checkY(){
+            let d=new Date();
+            d.setTime(d.getTime()+2592000000);//2592000000 : 30 days
+            document.cookie="User="+res.substr(res.indexOf(" ")+1)+";uid="+res.substr(0,res.indexOf(" "))+";expires="+d.toGMTString()+";path=/";
+        }
+        function checkN(){
+            document.cookie="User="+res.substr(res.indexOf(" ")+1)+";uid="+res.substr(0,res.indexOf(" "))+";path=/";
         }
     </script>
 </head>
 <body>
-    <div class="signIn">
+    <div class="signIn" id="signIn>
         用户名：<input type="text" id="user"><br/><br/>
         密码：<input type="password" id="pswd"><br/><br/>
         <button type="button" onclick="signIn()">登录</button>
+        <a href="https://jiziqian.github.io/bjsdfz18ban/signUp">还没有账号？点击这里</a>
+        <p>忘记密码？请联系管理员，邮箱：jzq20015005@outlook.com</p>
     </div>
 </body>
 </html>
