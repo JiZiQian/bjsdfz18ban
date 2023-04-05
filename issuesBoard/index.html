@@ -6,6 +6,15 @@
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
 	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
 	<script>
+		function replace(str,fd,to){
+    		let i=0;
+    		while(str.indexOf(fd,i)!=-1){
+        		let t=str.indexOf(fd,i)+to.length;
+        		str=str.substr(0,str.indexOf(fd,i))+to+str.substr(str.indexOf(fd,i)+fd.length);
+        		i=t;
+    		}
+		    return str;
+		}
 		function getIssues(){
 			init();
 			let texts;
@@ -16,6 +25,13 @@
 			ajaxAsk.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			ajaxAsk.send("type=getIssues&mode=issue");
 			document.getElementById("texts").innerHTML=ajaxAsk.responseText;
+			let converter=new showdown.Converter();
+			console.log(document.getElementsByClassName("texts").length);
+			for(let i=0;i<document.getElementsByClassName("texts").length;i++){
+				console.log(i);
+				document.getElementsByClassName("texts")[i].innerHTML=converter.makeHtml(document.getElementsByClassName("texts")[i].innerHTML);
+				document.getElementsByClassName("texts")[i].innerHTML=replace(document.getElementsByClassName("texts")[i].innerHTML,"\n","<br/>");
+			}
 		}
 		function onSubmit(){
 			init();
@@ -84,22 +100,6 @@
 	<script>
 		getIssues();
 		userInit();
-		function replace(str,fd,to){
-    		let i=0;
-    		while(str.indexOf(fd,i)!=-1){
-        		let t=str.indexOf(fd,i)+to.length;
-        		str=str.substr(0,str.indexOf(fd,i))+to+str.substr(str.indexOf(fd,i)+fd.length);
-        		i=t;
-    		}
-		    return str;
-		}
-		let converter=new showdown.Converter();
-		console.log(document.getElementsByClassName("texts").length);
-		for(let i=0;i<document.getElementsByClassName("texts").length;i++){
-			console.log(i);
-			document.getElementsByClassName("texts")[i].innerHTML=converter.makeHtml(document.getElementsByClassName("texts")[i].innerHTML);
-		}
-		document.getElementsByClassName("texts")[i].innerHTML=replace(document.getElementsByClassName("texts")[i].innerHTML,"\n","<br/>");
 	</script>
 </body>
 </html>
