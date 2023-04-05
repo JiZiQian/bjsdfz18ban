@@ -1,0 +1,76 @@
+.head {
+    background-color:rgb(255, 222, 179);
+    display: flex;
+}
+#ltitle {
+    text-align: left;
+    width: 50%;
+}
+#rtitle {
+    text-align: right;
+    width: 50%;
+}
+.mode {
+    background-color: rgb(255, 186, 97);
+    display: flex;
+    width: 100%;
+}
+.submode {
+    width: 3%;
+}
+.game {
+    display: flex;
+    width: 100%;
+    margin: 10pt;
+}
+#qc {
+    width: 25%;
+    height: 300pt;
+    border: 10pt solid;
+    border-color: rgb(255, 254, 165);
+}
+#full-label {
+    text-align: center;
+}
+#full {
+    font-size: 40pt;
+    text-align: center;
+}
+#sx {
+    width: 25%;
+    height: 300pt;
+    margin-left: 5pt;
+    margin-right: 5pt;
+    border: 10pt solid;
+    border-color: rgb(255, 254, 165);
+}
+#sx-label {
+    text-align: center;
+}
+#zipped {
+    font-size: 40pt;
+    text-align: center;
+}
+#sh {
+    width: 25%;
+    height: 300pt;
+    border: 10pt solid;
+    border-color: rgb(255, 254, 165);
+}
+#sh-label {
+    text-align: center;
+}
+#city {
+    font-size: 40pt;
+    text-align: center;
+}
+#controls {
+    display: block;
+    text-align: center;
+}
+.rbtn {
+    width: 200pt;
+    height: 90pt;
+    margin: 10pt;
+    font-size: 30pt;
+}

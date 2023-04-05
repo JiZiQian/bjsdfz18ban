@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>省级行政区划测试</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="./script.js"></script>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+    <div class="head" onclick="window.open('https://jiziqian.github.io/bjsdfz18ban')">
+        <h1 id="ltitle">省级行政区划测试</h1>
+        <h1 id="rtitle">Ø Immortal</h1>
+    </div>
+    <div class="mode">
+        <input class="submode" type="radio" name="mode" checked>显示全称
+        <input class="submode" type="radio" name="mode">显示简称
+        <input class="submode" type="radio" name="mode">显示省会
+    </div>
+    <div class="game">
+        <div id="qc">
+            <h1 id="full-label">全称:</h1>
+            <b><p id="full"></p></b>
+        </div>
+        <div id="sx">
+            <h1 id="sx-label">简称:</h1>
+            <b><p id="zipped"></p></b>
+        </div>
+        <div id="sh">
+            <h1 id="sh-label">省会:</h1>
+            <b><p id="city"></p></b>
+        </div>
+        <div id="controls">
+            <button class="rbtn" onclick="Start()" id="start">开始</button>
+            <button class="rbtn" onclick="showData()">显示</button>
+            <button class="rbtn" onclick="nextData()">下一个</button>
+        </div>
+    </div>
+</body>
