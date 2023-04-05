@@ -19,7 +19,7 @@ function check(){
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    ajax.send("mode=users&type=signIn&user="+ckie[0].substr(ckie[0].indexOf("=")+1)+"&password="+ckie[1].substr(ckie[1].indexOf("=")+1));
+    ajax.send("mode=users&type=signIn&user="+ckie[0].substr(ckie[0].indexOf("=")+1));
     res=ajax.responseText;
     console.log(res);
     if(res=="-1"){
