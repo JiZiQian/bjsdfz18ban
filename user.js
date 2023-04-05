@@ -14,7 +14,7 @@ function logOut(){
 function userInit(){
     console.log(ckie);
     if(ckie.length==1){
-        document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\">登录</a>";
+        document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\" id=\"userName\">登录</a>";
     }
     else{
         hide();
