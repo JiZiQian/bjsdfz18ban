@@ -1,3 +1,4 @@
+let ckie=document.cookie.split(";");
 function show(){
     document.getElementById("user").innerHTML="<button id=\"userName\" onclick=\"logOut()\" onmouseout=\"hide()\" style=\"height:25px;width:60px;\">登出</button>";
 }
@@ -11,7 +12,6 @@ function logOut(){
     window.location.reload();
 }
 function userInit(){
-    let ckie=document.cookie.split(";");
     console.log(ckie);
     if(ckie.length==1){
         document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\">登录</a>";
