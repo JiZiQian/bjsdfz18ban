@@ -47,10 +47,14 @@
         function checkY(){
             let d=new Date();
             d.setTime(d.getTime()+2592000000);//2592000000 : 30 days
-            document.cookie="User="+res.substr(res.indexOf(" ")+1)+";uid="+res.substr(0,res.indexOf(" "))+";expires="+d.toGMTString()+";path=/";
+            let add=";expires="+d.toGMTString()+";path=/"
+            document.cookie="User="+res.substr(res.indexOf(" ")+1)+add;
+            document.cookie=";uid="+res.substr(0,res.indexOf(" "))+add;
         }
         function checkN(){
-            document.cookie="User="+res.substr(res.indexOf(" ")+1)+";uid="+res.substr(0,res.indexOf(" "))+";path=/";
+            let add=";path=/"
+            document.cookie="User="+res.substr(res.indexOf(" ")+1)+add;
+            document.cookie=";uid="+res.substr(0,res.indexOf(" "))+add;
         }
     </script>
 </head>
