@@ -27,7 +27,6 @@
 			for(let i=0;i<document.getElementsByClassName("texts").length;i++){
 				console.log(i);
 				document.getElementsByClassName("texts")[i].innerHTML=converter.makeHtml(document.getElementsByClassName("texts")[i].innerHTML);
-				renderMathInElement(document.getElementsByClassName("texts")[i]);
 			}
 		}
 		function onSubmit(){
@@ -95,6 +94,18 @@
 	<script>
 		getIssues();
 		userInit();
+		document.addEventListener("DOMContentLoaded", function() {
+    	    renderMathInElement(document.body, {
+          		delimiters: [
+	              	{left: '$$', right: '$$', display: true},
+              		{left: '$', right: '$', display: true},
+              		{left: '\\(', right: '\\)', display: true},
+              		{left: '\\[', right: '\\]', display: true}
+          		],
+          		// • rendering keys, e.g.:
+          		throwOnError : false
+        	});
+    	});
 	</script>
 </body>
 </html>
