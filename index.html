@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>北京师范大学附属中学初中2025毕业级18班官网</title>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
+	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
 </head>
 <body>
 	<div class="head">
@@ -30,7 +31,7 @@
 		ajaxHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		ajaxHttp.send();
 		document.getElementById("introduction").innerHTML=ajaxHttp.responseText;
+		userInit();
 	</script>
-	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
 </body>
 </html>
