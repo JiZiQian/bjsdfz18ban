@@ -3,7 +3,7 @@ function show(){
     document.getElementById("logOut").style.visibility="visible";
 }
 function hide(){
-    if(isOn=1) return;
+    if(isOn==1) return;
     document.getElementById("logOut").style.visibility="hidden";
 }
 function logOut(){
