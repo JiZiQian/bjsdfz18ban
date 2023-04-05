@@ -1,3 +1,4 @@
+let isOn=0;
 function show(){
     document.getElementById("logOut").style.visibility="visible";
 }
@@ -10,6 +11,12 @@ function logOut(){
     document.cookie="uid=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
     window.location.reload();
 }
+function show2(){
+    isOn=1;
+}
+function hide2(){
+    isOn=0;
+}
 function userInit(){
     let ckie=document.cookie.split(";");
     console.log(ckie);
@@ -17,7 +24,7 @@ function userInit(){
         document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/signIn\">登录</a>";
     }
     else{
-        document.getElementById("user").innerHTML="<p id=\"userName\" onmouseover=\"show();\" onmouseout=\"hide();\"></p><button class=\"logOut\" id=\"logOut\" onclick=\"logOut()\" onmouseover=\"isOn=1;\" onmouseout=\"isOn=0;\">登出</button>";
+        document.getElementById("user").innerHTML="<p id=\"userName\" onmouseover=\"show()\" onmouseout=\"hide()\"></p><button class=\"logOut\" id=\"logOut\" onclick=\"logOut()\" onmouseover=\"show2()\" onmouseout=\"hide2()\">登出</button>";
         hide();
         document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
     }
