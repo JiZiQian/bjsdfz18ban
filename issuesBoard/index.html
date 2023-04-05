@@ -98,8 +98,8 @@
 		for(let i=0;i<document.getElementsByClassName("texts").length;i++){
 			console.log(i);
 			document.getElementsByClassName("texts")[i].innerHTML=converter.makeHtml(document.getElementsByClassName("texts")[i].innerHTML);
-			document.getElementsByClassName("texts")[i].innerHTML=replace(document.getElementsByClassName("texts")[i].innerHTML,"&lt;br&gt;","");
 		}
+		document.getElementsByClassName("texts")[i].innerHTML=replace(document.getElementsByClassName("texts")[i].innerHTML,"\n","<br/>");
 	</script>
 </body>
 </html>
