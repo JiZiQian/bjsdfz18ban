@@ -89,11 +89,9 @@
 	<script>
 		getIssues();
 		userInit();
-		let texts=document.getElementsByClassName("texts");
 		let converter=new showdown.Converter();
 		for(let i=0;i<length;i++){
-			texts[i]=converter.makeHtml(texts[i]);
-			document.getElementsByClassName("texts")[i]=texts[i];
+			document.getElementsByClassName("texts")[i].innerHTML=converter.makeHtml(document.getElementsByClassName("texts")[i].innerHTML);
 		}
 	</script>
 </body>
