@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.head {
+    background-color:rgb(255, 222, 179);
+    display: flex;
+}
+#ltitle {
+    text-align: left;
+    width: 50%;
+}
+#rtitle {
+    text-align: right;
+    width: 50%;
+}
+#intro {
+    text-align: center;
+    font-size: large;
+    margin: 10pt;
+}
+.menu {
+    list-style: none;
+    display: flex;
+    width: 100%;
+}
+.menu a {
+    border: 3pt;
+    border-color: orange;
+    background-color: yellow;
+    width: 30%;
+    height: 50pt;
+    margin: 10pt;
+}
+.menu a p {
+    text-align: center;
+    padding: 15pt;
+}
