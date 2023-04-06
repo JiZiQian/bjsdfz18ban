@@ -11,6 +11,10 @@
 	<script defer src="https://jiziqian.github.io/bjsdfz18ban/issuesBoard/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 	<!-- showdown:markdown -->
 	<script src="https://jiziqian.github.io/bjsdfz18ban/issuesBoard/showdown.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/bjsdfz18ban/issuesBoard/style.css">
+	<!-- hignlight -->
+	<link rel="stylesheet" href="https://jiziqian.github.io/bjsdfz18ban/issuesBoard/mdstyle.css">
+	<script src="https://jiziqian.github.io/bjsdfz18ban/issuesBoard/highlight.min.js"></script>
 	<script>
 		function getIssues(){
 			init();
@@ -92,9 +96,9 @@
 		<a href="https://jiziqian.github.io/bjsdfz18ban">回到首页</a>
 	</div>
 	<script>
-		getIssues();
-		userInit();
 		document.addEventListener("DOMContentLoaded", function() {
+			getIssues();
+			userInit();
     	    renderMathInElement(document.body, {
           		delimiters: [
 	              	{left: '$$', right: '$$', display: true},
@@ -105,6 +109,7 @@
           		// • rendering keys, e.g.:
           		throwOnError : false
         	});
+			hljs.highlightAll();
     	});
 	</script>
 </body>
