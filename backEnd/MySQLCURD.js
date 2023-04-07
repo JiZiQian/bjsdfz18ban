@@ -9,9 +9,6 @@ exports.init=function(hst,usr,pswd,dtbs){
 exports.query=function(table,add,callback){
     connection.query('SELECT * FROM '+table+' '+add,callback);
 };
-exports.query2=function(column,table,add,callback){
-    connection.query('SELECT '+column+' FROM '+table+' '+add,callback);
-};
 exports.insert=function(table,title,content,callback){
     connection.query('INSERT INTO '+table+' ('+title+') VALUES ('+content+')',callback);
 };

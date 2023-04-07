@@ -4,7 +4,7 @@ function show(){
     document.getElementById("user").innerHTML="<button id=\"userName\" onclick=\"logOut()\" onmouseout=\"hide()\" style=\"height:auto;width:auto;\">登出</button>";
 }
 function hide(){
-    document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\"></p>";
+    document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\" style=\"position:absolute;top:10px;right:10px;\"></p>";
     document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
 }
 function logOut(){

@@ -75,6 +75,7 @@ http.createServer(function(req,res){
                     }
                     else{
                         res.end("失败：用户已存在");
+                        mysql.close();
                     }
                 });
             }
@@ -87,6 +88,7 @@ http.createServer(function(req,res){
                     else{
                         res.end(result[0].id+" "+result[0].user);
                     }
+                    mysql.close();
                 })
             }
             if(post.type=="check"){
@@ -98,6 +100,7 @@ http.createServer(function(req,res){
                     else{
                         res.end("1");
                     }
+                    mysql.close();
                 })
             }
         }
