@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客</title>
+	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
+	<script src="https://jiziqian.github.io/bjsdfz18ban/user.js"></script>
+	<!-- KaTaX:LaTeX -->
+	<link rel="stylesheet" href="https://jiziqian.github.io/bjsdfz18ban/blogs/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+	<script defer src="https://jiziqian.github.io/bjsdfz18ban/blogs/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+	<script defer src="https://jiziqian.github.io/bjsdfz18ban/blogs/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+	<!-- showdown:markdown -->
+	<script src="https://jiziqian.github.io/bjsdfz18ban/blogs/showdown.min.js"></script>
+	<!-- hignlight -->
+	<link rel="stylesheet" href="https://jiziqian.github.io/bjsdfz18ban/blogs/mdstyle.css">
+	<script src="https://jiziqian.github.io/bjsdfz18ban/blogs/highlight.min.js"></script>
+    <script>
+        function getBlogs(){
+            init();
+			let texts;
+			let ajaxAsk;
+			if(window.XMLHttpRequest) ajaxAsk=new XMLHttpRequest();
+			else ajaxAsk=new ActiveXObject("Microsoft.XMLHTTP");
+			ajaxAsk.open("POST",httpBackEnd,false);
+			ajaxAsk.setRequestHeader("Content-type","application/json;charset=UTF-8");
+			ajaxAsk.send("mode=blog&type=get");
+            let blogs=JSON.parse(ajaxAsk.responseText);
+            
+        }
+    </script>
+	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
+	<style>
+		.blogs .select {
+			float: left;
+			width: 62%;
+			padding: 0px 0px 10px 0px;
+		}
+		.submit {
+			float: right;
+			width: 38%;
+		}
+		@media screen and (max-width:800px) {
+			.issues{
+				width:100%;
+			}
+			.submit{
+				width:100%;
+				position: relative;
+				left: 10px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="head">
+		<h1>博客</h1>
+		<div id="user" class="user"></div>
+	</div>
+	<div class="main">
+		<div class="submit">
+			博客内容:<br/>
+			<textarea id="text" placeholder="此处输入博客内容" style="width:95%" onscroll="this.rows++;"></textarea><br/>
+			<button type="button" onclick="onSubmit()">提交</button>
+		</div>
+		<div id="texts" class="select"></div>
+		<div id="texts" class="issues"></div>
+	</div>
+	<div class="tail">
+		<a href="https://jiziqian.github.io/bjsdfz18ban">回到首页</a>
+	</div>
+    <script>
+		document.addEventListener("DOMContentLoaded", function() {
+            getBlogs();
+			userInit();
+    	    renderMathInElement(document.body, {
+          		delimiters: [
+	              	{left: '$$', right: '$$', display: true},
+              		{left: '$', right: '$', display: true},
+              		{left: '\\(', right: '\\)', display: true},
+              		{left: '\\[', right: '\\]', display: true}
+          		],
+          		// • rendering keys, e.g.:
+          		throwOnError : false
+        	});
+			hljs.highlightAll();
+    	});
+	</script>
+</body>
+</html>
