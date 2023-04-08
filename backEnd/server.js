@@ -47,7 +47,7 @@ http.createServer(function(req,res){
                                     r(result2);
                                 }
                                 else{
-                                    data+='<p class=\"userName\">'+result2[0].user+':</p><br/>';
+                                    data+='<p class=\"userName\">'+result2[0].user+':</p>';
                                     data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
                                     r(result2);
                                 }

@@ -1,7 +1,7 @@
 let ckie=document.cookie.split(";");
 let signed;
 function show(){
-    document.getElementById("user").innerHTML="<button id=\"userName\" onclick=\"logOut()\" onmouseout=\"hide()\" style=\"height:auto;width:auto;position:absolute;top:10px;right:10px;\">登出</button>";
+    document.getElementById("user").innerHTML="<button id=\"userName\" class=\"userName\" onclick=\"logOut()\" onmouseout=\"hide()\" style=\"height:auto;width:auto;position:absolute;top:10px;right:10px;\">登出</button>";
 }
 function hide(){
     document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\" style=\"position:absolute;top:10px;right:10px;\"></p>";
