@@ -18,8 +18,8 @@ http.createServer(function(req,res){
     });
     req.on("end",function(){
         post=querystring.parse(post);
-        res.writeHead(200,{"Content-Type":"text/html;charset=utf-8","Access-Control-Allow-Origin":"*"});
         if(post.mode=="issue"){
+            res.writeHead(200,{"Content-Type":"text/html;charset=utf-8","Access-Control-Allow-Origin":"*"});
             if(post.type=="upload"){
                 var issue=require("./issue");
                 issue.init('127.0.0.1','root','','Server18');
@@ -32,7 +32,7 @@ http.createServer(function(req,res){
                 var mysql=require("./MySQLCURD");
                 mysql.init('127.0.0.1','root','','Server18');
                 var data="";
-                var x=mysql.query('Issues','',async function(err,result){
+                var x=mysql.query('Issues','',function(err,result){
                     if(err){
                         console.log("error "+err.message);
                         return;
@@ -41,17 +41,14 @@ http.createServer(function(req,res){
                         console.log(i);
                         console.log(result);
                         console.log(result[i]);
-                        await new Promise(function(r){
-                            mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
-                                if(err||!result2.length){
-                                    r(result2);
-                                }
-                                else{
-                                    data+='<p class=\"userName\">'+result2[0].user+':</p>';
-                                    data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
-                                    r(result2);
-                                }
-                            });
+                        mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
+                            if(err||!result2.length){
+                                console.log("error "+err);
+                            }
+                            else{
+                                data+='<p class=\"userName\">'+result2[0].user+':</p>';
+                                data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                            }
                         });
                     }
                     res.end(data);
@@ -60,6 +57,7 @@ http.createServer(function(req,res){
             }
         }
         else if(post.mode=="users"){
+            res.writeHead(200,{"Content-Type":"text/plain;charset=utf-8","Access-Control-Allow-Origin":"*"});
             var mysql=require("./MySQLCURD");
             mysql.init('127.0.0.1','root','','Server18');
             if(post.type=="signUp"){
@@ -106,7 +104,53 @@ http.createServer(function(req,res){
                 })
             }
         }
+        else if(post.mode=="blog"){
+            res.writeHead(200,{"Content-Type":"application/json;charset=utf-8","Access-Control-Allow-Origin":"*"});
+            var mysql=require("./MySQLCURD");
+            mysql.init('127.0.0.1','root','','Server18');
+            if(post.type=="get"){
+                let arr=[];
+                mysql.query("Blogs","",function(err,result){
+                    if(err){
+                        console.log("error "+err);
+                        return;
+                    }
+                    if(!result.length){
+                        return;
+                    }
+                    for(let i=0;i<result.length;i++){
+                        mysql.query("Users","WHERE id="+result[i].userid,function(err,result2){
+                            if(err){
+                                console.log("error "+err);
+                                return;
+                            }
+                            if(!result2.length){
+                                return;
+                            }
+                            let blog=new Object();
+                            blog.user=result2[0].user;
+                            blog.title=result[i].title;
+                            arr.push(blog);
+                        });
+                    }
+                });
+                mysql.close();
+                res.end(JSON.stringify(arr));
+            }
+            if(post.type=="upload"){
+                mysql.insert("Users","id,title,blog,userid","0,\""+post.title+"\",\""+post.blog+"\","+post.userid,function(err,result){
+                    if(err){
+                        console.log("error "+err);
+                        return;
+                    }
+                    console.log(result);
+                    res.end("");
+                    mysql.close();
+                });
+            }
+        }
         else{
+            res.writeHead(200,{"Content-Type":"text/plain;charset=utf-8","Access-Control-Allow-Origin":"*"});
             res.end();
         }
     });
