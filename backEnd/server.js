@@ -43,7 +43,7 @@ http.createServer(function(req,res){
                         console.log(result[i]);
                         mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
                             if(err||!result2.length){
-                                console.log("error "+err);
+                                return;
                             }
                             else{
                                 data+='<p class=\"userName\">'+result2[0].user+':</p>';
