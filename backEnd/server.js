@@ -43,12 +43,14 @@ http.createServer(function(req,res){
                         console.log(result[i]);
                         await new Promise(function(r){
                             mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
-                                console.log(i);
-                                console.log(result);
-                                console.log(result[i]);
-                                data+='<p class=\"userName\">'+result2[0].user+':</p><br/>';
-                                data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:10px 10px 0px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
-                                r(result2);
+                                if(err||!result2.length){
+                                    r(result2);
+                                }
+                                else{
+                                    data+='<p class=\"userName\">'+result2[0].user+':</p><br/>';
+                                    data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                                    r(result2);
+                                }
                             });
                         });
                     }
