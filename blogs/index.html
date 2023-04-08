@@ -72,12 +72,12 @@
 		<div class="submit">
 			<div class="edit">
 				博客内容:<br/>
-				<textarea id="edit" placeholder="此处输入博客内容" onscroll="this.rows++;"></textarea><br/>
+				<textarea id="edit" placeholder="此处输入博客内容" onscroll="this.rows++;" style="width:100%;"></textarea><br/>
 				<button type="button" onclick="onSubmit()">提交</button>
 			</div>
 			<div class="display">
 				预览:<br/>
-				<div id="display"></div>
+				<div id="display" style="width:100%;"></div>
 			</div>
 		</div>
 		<div id="texts" class="select"></div>
@@ -93,7 +93,7 @@
             getBlogs();
 			setInterval(function(){
 				let converter=new showdown.Converter();
-				document.getElementById("display").innerHTML=converter.makeHtml(document.getElementById("edit"));
+				document.getElementById("display").innerHTML=converter.makeHtml(document.getElementById("edit").value);
 				renderMathInElement(document.getElementById("display"), {
           			delimiters: [
 	            	  	{left: '$$', right: '$$', display: true},
