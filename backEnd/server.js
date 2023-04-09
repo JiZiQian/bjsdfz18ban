@@ -32,23 +32,34 @@ http.createServer(function(req,res){
                 var mysql=require("./MySQLCURD");
                 mysql.init('127.0.0.1','root','','Server18');
                 var data="";
-                var x=mysql.query('Issues','',function(err,result){
-                    if(err){
-                        console.log("error "+err.message);
+                mysql.query('Issues','',async function(err,result){
+                    console.log(result);
+                    if(err||!result.length){
+                        console.log("issues empty");
                         return;
                     }
                     for(var i=0;i<result.length;i++){
                         console.log(i);
                         console.log(result);
                         console.log(result[i]);
-                        mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
-                            if(err||!result2.length){
-                                return;
-                            }
-                            else{
-                                data+='<p class=\"userName\">'+result2[0].user+':</p>';
-                                data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
-                            }
+                        await new Promise(function(r){
+                            console.log(i);
+                            console.log(result[i]);
+                            console.log(result[i].userid);
+                            mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
+                                console.log(result2);
+                                if(err||!result2.length){
+                                    console.log("user undefined");
+                                }
+                                else{
+                                    console.log(i);
+                                    console.log(result);
+                                    console.log(result[i]);
+                                    data+='<p class=\"userName\">'+result2[0].user+':</p>';
+                                    data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                                }
+                                r();
+                            });
                         });
                     }
                     res.end(data);
@@ -119,18 +130,17 @@ http.createServer(function(req,res){
                         return;
                     }
                     for(let i=0;i<result.length;i++){
-                        mysql.query("Users","WHERE id="+result[i].userid,function(err,result2){
-                            if(err){
-                                console.log("error "+err);
-                                return;
-                            }
-                            if(!result2.length){
-                                return;
-                            }
-                            let blog=new Object();
-                            blog.user=result2[0].user;
-                            blog.title=result[i].title;
-                            arr.push(blog);
+                        new Promise(function(r){
+                            mysql.query("Users","WHERE id="+result[i].userid,function(err,result2){
+                                if(err||!result2.length){
+                                    r();
+                                }
+                                let blog=new Object();
+                                blog.user=result2[0].user;
+                                blog.title=result[i].title;
+                                arr.push(blog);
+                                r();
+                            });
                         });
                     }
                 });

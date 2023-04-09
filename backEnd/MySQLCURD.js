@@ -7,12 +7,7 @@ exports.init=function(hst,usr,pswd,dtbs){
     connection.connect();
 }
 exports.query=function(table,add,callback){
-    new Promise(function(r){
-        connection.query('SELECT * FROM '+table+' '+add,function(err,res){
-            callback(err,res);
-            r();
-        });
-    });
+    connection.query('SELECT * FROM '+table+' '+add,callback);
 };
 exports.insert=function(table,title,content,callback){
     connection.query('INSERT INTO '+table+' ('+title+') VALUES ('+content+')',callback);
