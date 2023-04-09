@@ -121,7 +121,7 @@ http.createServer(function(req,res){
             mysql.init('127.0.0.1','root','','Server18');
             if(post.type=="get"){
                 let arr=[];
-                mysql.query("Blogs","",function(err,result){
+                mysql.query("Blogs","",async function(err,result){
                     if(err){
                         console.log("error "+err);
                         return;
@@ -130,7 +130,7 @@ http.createServer(function(req,res){
                         return;
                     }
                     for(let i=0;i<result.length;i++){
-                        new Promise(function(r){
+                        await new Promise(function(r){
                             mysql.query("Users","WHERE id="+result[i].userid,function(err,result2){
                                 if(err||!result2.length){
                                     r();
@@ -143,9 +143,9 @@ http.createServer(function(req,res){
                             });
                         });
                     }
+                    mysql.close();
+                    res.end(JSON.stringify(arr));
                 });
-                mysql.close();
-                res.end(JSON.stringify(arr));
             }
             if(post.type=="upload"){
                 mysql.insert("Users","id,title,blog,userid","0,\""+post.title+"\",\""+post.blog+"\","+post.userid,function(err,result){
