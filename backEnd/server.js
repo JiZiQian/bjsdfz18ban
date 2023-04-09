@@ -138,6 +138,7 @@ http.createServer(function(req,res){
                                 let blog=new Object();
                                 blog.user=result2[0].user;
                                 blog.title=result[i].title;
+                                blog.id=result[i].id;
                                 arr.push(blog);
                                 r();
                             });

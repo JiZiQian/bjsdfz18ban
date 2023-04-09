@@ -15,6 +15,17 @@
 	<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/a11y-dark.min.css">
 	<script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
     <script>
+		let blogs;
+		function search(){
+			let user=document.getElementById("userselect").value;
+			let title=document.getElementById("title").value;
+			for(let i=0;i<blogs.length;i++){
+				if(blogs[i].user.indexOf(user)!=-1&&blogs[i].title.indexOf(title)!=-1){
+					document.getElementById("blogs").innerHTML+="<p class=\"userName\">"+blogs[i].user+":</p>";
+					document.getElementById("blogs").innerHTML+="<a style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left;text-decoration:none\" href=\"/?id="+blogs[i].id+"\" target=\"_blank\">"+blogs[i].title+"</a>"
+				}
+			}
+		}
         function getBlogs(){
             init();
 			let texts;
@@ -24,19 +35,25 @@
 			ajaxAsk.open("POST",httpBackEnd,false);
 			ajaxAsk.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
 			ajaxAsk.send("mode=blog&type=get");
-            let blogs=JSON.parse(ajaxAsk.responseText);
+            blogs=JSON.parse(ajaxAsk.responseText);
+			search();
         }
     </script>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
 	<style>
-		.blogs .select {
+		.blogs{
 			float: left;
-			width: 50%;
-			padding: 0px 0px 10px 0px;
+			width: 49%;
+			padding: 0px 0px 0px 0px;
+		}
+		.select {
+			float: left;
+			width: 49%;
+			padding: 10px;
 		}
 		.submit {
 			float: right;
-			width: 50%;
+			width: 49%;
 		}
 		.submit:after {
 			content: "";
@@ -61,6 +78,9 @@
 				left: 10px;
 			}
 		}
+		.selectcontent{
+			display: inline;
+		}
 	</style>
 </head>
 <body>
@@ -80,8 +100,12 @@
 				<div id="display" style="width:100%;"></div>
 			</div>
 		</div>
-		<div id="texts" class="select"></div>
-		<div id="texts" class="issues"></div>
+		<div id="texts" class="select">
+			<button class="selectcontent" onclick="search()">筛选</button>
+			<input type="text" id="userselect" placeholder="筛选作者" class="selectcontent">
+			<input type="text" id="title" placeholder="筛选标题" class="selectcontent">
+		</div>
+		<div id="blogs" class="blogs"></div>
 	</div>
 	<div class="tail">
 		<a href="https://jiziqian.github.io/bjsdfz18ban">回到首页</a>
