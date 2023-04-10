@@ -19,10 +19,11 @@
 		function search(){
 			let user=document.getElementById("userselect").value;
 			let title=document.getElementById("title").value;
+			document.getElementById("blogs").innerHTML="";
 			for(let i=0;i<blogs.length;i++){
 				if(blogs[i].user.indexOf(user)!=-1&&blogs[i].title.indexOf(title)!=-1){
 					document.getElementById("blogs").innerHTML+="<p class=\"userName\">"+blogs[i].user+":</p>";
-					document.getElementById("blogs").innerHTML+="<a style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left;text-decoration:none\" href=\"/?id="+blogs[i].id+"\" target=\"_blank\">"+blogs[i].title+"</a>"
+					document.getElementById("blogs").innerHTML+="<div style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left;\"><a href=\"/bjsdfz18ban/blogs/?id="+blogs[i].id+"\" target=\"_blank\" style=\"text-decoration:none;display:block;color:black;\">"+blogs[i].title+"</a></div>"
 				}
 			}
 		}
@@ -39,12 +40,30 @@
 			search();
         }
 		function onSubmit(){
+			init();
+			if(signed==false){
+				alert("请先登录！");
+				return;
+			}
+			let title=document.getElementById("title").value;
+			if(blog.replace(/\s/g,"").length==0){
+				alert("不能发送空标题！");
+				return;
+			}
+			let blog=document.getElementById("edit").value;
+			if(blog.replace(/\s/g,"").length==0){
+				alert("不能发送博客！");
+				return;
+			}
 			let ajax;
 			if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
 			else ajax=new ActiveXObject("Microsoft.XMLHTTP");
 			ajax.open("POST",httpBackEnd,false);
 			ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
-			ajax.send("mode=blog&type=upload&title="+document.getElementById("title").value+"&blog="+document.getElementById("edit").value+"&userid="+ckie[1].substr(ckie[1].indexOf("=")+1));
+			ajax.send("mode=blog&type=upload&title="+title+"&blog="+blog+"&userid="+ckie[1].substr(ckie[1].indexOf("=")+1));
+			document.getElementById("edit").value="";
+			document.getElementById("edit").rows=2;
+			document.getElementById("title").value="";
 			getBlogs();
 		}
     </script>

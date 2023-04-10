@@ -150,9 +150,18 @@ http.createServer(function(req,res){
                 });
             }
             if(post.type=="upload"){
-                mysql.insert("Users","id,title,blog,userid","0,\""+post.title+"\",\""+post.blog+"\","+post.userid,function(err,result){
+                let data=replace(post.blog,"\'","&#39;");
+                data=replace(data,"\"","&quot;");
+                data=replace(data,"<","&lt;");
+                data=replace(data,">","&gt;");
+                let str=replace(post.title,"\'","&#39;");
+                str=replace(str,"\"","&quot;");
+                str=replace(str,"<","&lt;");
+                str=replace(str,">","&gt;");
+                mysql.insert("Blogs","id,title,blog,userid","0,\""+str+"\",\""+data+"\","+post.userid,function(err,result){
                     if(err){
                         console.log("error "+err);
+                        res.end("");
                         mysql.close();
                         return;
                     }
