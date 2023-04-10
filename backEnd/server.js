@@ -36,6 +36,8 @@ http.createServer(function(req,res){
                     console.log(result);
                     if(err||!result.length){
                         console.log("issues empty");
+                        res.end("");
+                        mysql.close();
                         return;
                     }
                     for(var i=0;i<result.length;i++){
@@ -119,14 +121,13 @@ http.createServer(function(req,res){
             res.writeHead(200,{"Content-Type":"application/json;charset=utf-8","Access-Control-Allow-Origin":"*"});
             var mysql=require("./MySQLCURD");
             mysql.init('127.0.0.1','root','','Server18');
+            console.log()
             if(post.type=="get"){
                 let arr=[];
                 mysql.query("Blogs","",async function(err,result){
-                    if(err){
-                        console.log("error "+err);
-                        return;
-                    }
-                    if(!result.length){
+                    if(err||!result.length){
+                        res.end(JSON.stringify(arr));
+                        mysql.close();
                         return;
                     }
                     for(let i=0;i<result.length;i++){
@@ -152,6 +153,7 @@ http.createServer(function(req,res){
                 mysql.insert("Users","id,title,blog,userid","0,\""+post.title+"\",\""+post.blog+"\","+post.userid,function(err,result){
                     if(err){
                         console.log("error "+err);
+                        mysql.close();
                         return;
                     }
                     console.log(result);

@@ -38,6 +38,15 @@
             blogs=JSON.parse(ajaxAsk.responseText);
 			search();
         }
+		function onSubmit(){
+			let ajax;
+			if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
+			else ajax=new ActiveXObject("Microsoft.XMLHTTP");
+			ajax.open("POST",httpBackEnd,false);
+			ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+			ajax.send("mode=blog&type=upload&title="+document.getElementById("title").value+"&blog="+document.getElementById("edit").value+"&userid="+ckie[1].substr(ckie[1].indexOf("=")+1));
+			getBlogs();
+		}
     </script>
 	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
 	<style>
@@ -91,6 +100,8 @@
 	<div class="main">
 		<div class="submit">
 			<div class="edit">
+				标题:<br/>
+				<input type="text" id="title" placeholder="请输入标题"><br/>
 				博客内容:<br/>
 				<textarea id="edit" placeholder="此处输入博客内容" onscroll="this.rows++;" style="width:100%;"></textarea><br/>
 				<button type="button" onclick="onSubmit()">提交</button>
