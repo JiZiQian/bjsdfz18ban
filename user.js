@@ -33,7 +33,7 @@ function userInit(){
     console.log(ckie);
     if(ckie.length==1||check()==false){
         signed=false;
-        document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/bjsdfz18ban/signIn\" class=\"userName\" style=\"text-decoration:none;color:black;border:2px solid black;border-radius:10px;padding:5px;\">登录</a>";
+        document.getElementById("user").innerHTML="<a href=\"https://jiziqian.github.io/bjsdfz18ban/signIn\" class=\"userName\" style=\"text-decoration:none;color:black;border:2px solid black;border-radius:10px;padding:5px;position:absolute;top:10px;right:10px;\">登录</a>";
     }
     else{
         signed=true;
