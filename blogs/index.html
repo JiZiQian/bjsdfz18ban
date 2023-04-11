@@ -112,33 +112,35 @@
 	</style>
 </head>
 <body>
-	<div class="head">
-		<h1>博客导航</h1>
-		<div id="user" class="user"></div>
-	</div>
-	<div class="main">
-		<div class="submit">
-			<div class="edit">
-				标题:<br/>
-				<input type="text" id="title" placeholder="请输入标题"><br/>
-				博客内容:<br/>
-				<textarea id="edit" placeholder="此处输入博客内容" onscroll="this.rows++;" style="width:100%;"></textarea><br/>
-				<button type="button" onclick="onSubmit()">提交</button>
-			</div>
-			<div class="display">
-				预览:<br/>
-				<div id="display" style="width:100%;"></div>
-			</div>
+	<div id="content" style="width:100%;height:auto;">
+		<div class="head">
+			<h1>博客导航</h1>
+			<div id="user" class="user"></div>
 		</div>
-		<div id="texts" class="select">
-			<button class="selectcontent" onclick="search()">筛选</button>
-			<input type="text" id="userselect" placeholder="筛选作者" class="selectcontent">
-			<input type="text" id="title" placeholder="筛选标题" class="selectcontent">
+		<div class="main">
+			<div class="submit">
+				<div class="edit">
+					标题:<br/>
+					<input type="text" id="title" placeholder="请输入标题"><br/>
+					博客内容:<br/>
+					<textarea id="edit" placeholder="此处输入博客内容" onscroll="this.rows++;" style="width:100%;"></textarea><br/>
+					<button type="button" onclick="onSubmit()">提交</button>
+				</div>
+				<div class="display">
+					预览:<br/>
+					<div id="display" style="width:100%;"></div>
+				</div>
+			</div>
+			<div id="texts" class="select">
+				<button class="selectcontent" onclick="search()">筛选</button>
+				<input type="text" id="userselect" placeholder="筛选作者" class="selectcontent">
+				<input type="text" id="title" placeholder="筛选标题" class="selectcontent">
+			</div>
+			<div id="blogs" class="blogs"></div>
 		</div>
-		<div id="blogs" class="blogs"></div>
-	</div>
-	<div class="tail">
-		<a href="https://jiziqian.github.io/bjsdfz18ban">回到首页</a>
+		<div class="tail">
+			<a href="https://jiziqian.github.io/bjsdfz18ban">回到首页</a>
+		</div>
 	</div>
     <script>
 		showdown.setOption('simpleLineBreaks', true);
@@ -155,6 +157,25 @@
 				ajax.open("POST",httpBackEnd,false);
 				ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
 				ajax.send("mode=blog&type=content&id="+id);
+				let blog=JSON.parse(ajax.responseText);
+				console.log(blog);
+				let title=blog[0].title;
+				let content=blog[0].blog;
+				document.getElementById("content").innerHTML="<h1>"+title+"</h1><br/>";
+				let converter=new showdown.Converter();
+				content=converter.makeHtml(content);
+				document.getElementById("content").innerHTML+=content;
+				renderMathInElement(document.getElementById("content"), {
+          			delimiters: [
+	            	  	{left: '$$', right: '$$', display: true},
+              			{left: '$', right: '$', display: true},
+              			{left: '\\(', right: '\\)', display: true},
+              			{left: '\\[', right: '\\]', display: true}
+          			],
+          			// • rendering keys, e.g.:
+          			throwOnError : false
+        		});
+				hljs.highlightAll();
 			}
 			userInit();
             getBlogs();
