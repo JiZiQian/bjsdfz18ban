@@ -143,13 +143,13 @@
 		</div>
 	</div>
     <script>
+		init();
 		showdown.setOption('simpleLineBreaks', true);
 		showdown.setOption('literalMidWordUnderscores', true);
 		showdown.setOption('underline', true);
 		document.addEventListener("DOMContentLoaded", function() {
 			let url=location.href;
 			if(url.indexOf("?id=")!=-1){
-				init();
 				let id=url.substr(url.indexOf("?id=")+4);
 				let ajax;
 				if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
