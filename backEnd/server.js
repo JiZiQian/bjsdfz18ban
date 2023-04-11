@@ -170,6 +170,20 @@ http.createServer(function(req,res){
                     mysql.close();
                 });
             }
+            if(post.type=="content"){
+                let id=post.id;
+                mysql.query("Blogs","WHERE id="+id,function(err,result){
+                    if(err||!result.length){
+                        console.log("empty result!");
+                        res.end(JSON.stringify({err:true}));
+                        mysql.close();
+                        return;
+                    }
+                    console.log(JSON.stringify(result));
+                    res.end(JSON.stringify(result));
+                    mysql.close();
+                });
+            }
         }
         else{
             res.writeHead(200,{"Content-Type":"text/plain;charset=utf-8","Access-Control-Allow-Origin":"*"});

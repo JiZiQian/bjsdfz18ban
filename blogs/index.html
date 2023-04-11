@@ -145,6 +145,16 @@
 		showdown.setOption('literalMidWordUnderscores', true);
 		showdown.setOption('underline', true);
 		document.addEventListener("DOMContentLoaded", function() {
+			let url=location.href;
+			if(url.indexOf("?id=")!=-1){
+				let id=url.substr(url.indexOf("?id=")+4);
+				let ajax;
+				if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
+				else ajax=new ActiveXObject("Microsoft.XMLHTTP");
+				ajax.open("POST",httpBackEnd,false);
+				ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
+				ajax.send("mode=blog&type=content&id="+id);
+			}
 			userInit();
             getBlogs();
 			setInterval(function(){
