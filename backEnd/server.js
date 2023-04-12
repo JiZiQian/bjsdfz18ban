@@ -158,7 +158,9 @@ http.createServer(function(req,res){
                 str=replace(str,"\"","&quot;");
                 str=replace(str,"<","&lt;");
                 str=replace(str,">","&gt;");
-                mysql.insert("Blogs","id,title,blog,userid","0,\""+str+"\",\""+data+"\","+post.userid,function(err,result){
+                let t='0,\"'+str+'\",\"'+data+'\",'+post.userid;
+                t=t.replace(/\\/g,"\\\\");
+                mysql.insert("Blogs","id,title,blog,userid",t,function(err,result){
                     if(err){
                         console.log("error "+err);
                         res.end("");
