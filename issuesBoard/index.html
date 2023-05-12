@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
+    <meta http-equiv='content-language' content='zh-CN'>
 	<title>留言板</title>
 	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
 	<script src="https://jiziqian.github.io/bjsdfz18ban/user.js"></script>
@@ -31,10 +32,14 @@
 			let ajaxSub;
 			if(window.XMLHttpRequest) ajaxSub=new XMLHttpRequest();
 			else ajaxSub=new ActiveXObject("Microsoft.XMLHTTP");
-			ajaxSub.onreadystatechange=function(){}
-			ajaxSub.open("POST",httpBackEnd,true);
-			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			ajaxSub.send("text="+text+"&type=upload&mode=issue&userid="+ckie[1].substr(ckie[1].indexOf("=")+1));
+			var packet=new Object();
+			packet.mode="issue";
+			packet.text=text;
+			packet.type="upload";
+			packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
+			ajaxSub.open("POST",httpBackEnd,false);
+			ajaxSub.setRequestHeader("Content-type","application/json");
+			ajaxSub.send(JSON.stringify(packet));
 			document.getElementById("text").value="";
 			document.getElementById("text").rows=2;
 			getIssues();

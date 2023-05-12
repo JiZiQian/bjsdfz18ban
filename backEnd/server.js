@@ -2,6 +2,7 @@ var http=require("http");
 var querystring = require('querystring');
 const { markAsUntransferable } = require("worker_threads");
 const { isTypedArray } = require("util/types");
+var user2users=require("./user2users");
 function replace(str,fd,to){
     let i=0;
     while(str.indexOf(fd,i)!=-1){
@@ -186,6 +187,24 @@ http.createServer(function(req,res){
                     mysql.close();
                 });
             }
+        }
+        else if(post.mode=="Chinese"){
+            res.writeHead(200,{"Content-Type":"text/html;charset=utf-8","Access-Control-Allow-Origin":"*"});
+            var fs=require("fs");
+            var data = fs.readFileSync('/Users/xiaoxinwu/www/back18/bjsdfz18ban/backEnd/words.txt');
+            data=data.toString();
+            let b=0;
+            var lines=new Array();
+            for(let i=0;i<data.length;i++){
+                if(data[i]=='\n'){
+                    lines.push(data.substring(b,i));
+                    b=i+1;
+                }
+            }
+            if(b<data.length) lines.push(data.substring(b));
+            console.log(lines);
+            let t=Math.min(Math.floor(Math.random()*(lines.length)),lines.length-1);
+            res.end(lines[t]);
         }
         else{
             res.writeHead(200,{"Content-Type":"text/plain;charset=utf-8","Access-Control-Allow-Origin":"*"});
