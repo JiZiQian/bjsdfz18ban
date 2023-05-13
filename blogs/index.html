@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv='content-language' content='zh-CN'>
+    <meta http-equiv="content-language" content="zh-CN">
     <title>博客</title>
 	<script src="https://jiziqian.github.io/bjsdfz18ban/script.js"></script>
 	<script src="https://jiziqian.github.io/bjsdfz18ban/user.js"></script>
@@ -67,6 +67,7 @@
 			packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
 			ajax.open("POST",httpBackEnd,false);
 			ajax.setRequestHeader("Content-type","application/json;charset=UTF-8");
+			ajaxSub.setRequestHeader("Access-Control-Allow-Headers","*");
 			ajax.send(JSON.stringify(packet));
 			document.getElementById("edit").value="";
 			document.getElementById("edit").rows=2;
