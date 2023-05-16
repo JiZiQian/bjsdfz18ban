@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+    getstr：获取讨论串
+    search：搜讨论串
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论坛</title>
+	<link rel="stylesheet" type="text/css" href="https://jiziqian.github.io/style.css">
+    <script src="./script.js"></script>
+    <style>
+        .main {
+            margin: 10pt;
+        }
+        .main .search #userselect {
+            width: 45%;
+        }
+        .main .search #title {
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" style="width: 100%;height: auto;">
+        <div class="head">
+            <h1>论坛</h1>
+            <div class="user"></div>
+        </div>
+        <div class="main">
+            <div class="search">
+				<button class="selectcontent" onclick="search()">搜索</button>
+				<input type="text" id="userselect" placeholder="筛选发起者" class="selectcontent">
+				<input type="text" id="title" placeholder="筛选标题" class="selectcontent">
+                <button class="selectcontent" onclick="window.open('./submit/index.html')">发送</button>
+            </div>
+        </div>
+        <div class="forums"></div>
+        <script>
+            getstr();
+        </script>
+    </div>
+</body>
+</html>
