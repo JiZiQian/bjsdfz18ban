@@ -20,6 +20,16 @@
         .main .search #title {
             width: 45%;
         }
+        .main .return {
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+        .main .return i {
+            font-size: x-large;
+            text-align: center;
+            margin: 5pt;
+        }
     </style>
 </head>
 <body>
@@ -29,6 +39,9 @@
             <div class="user"></div>
         </div>
         <div class="main">
+            <div class="return" onclick="window.open('../index.html')">
+                <i>返回主页</i>
+            </div>
             <div class="search">
 				<button class="selectcontent" onclick="search()">搜索</button>
 				<input type="text" id="userselect" placeholder="筛选发起者" class="selectcontent">
