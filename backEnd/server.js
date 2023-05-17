@@ -206,6 +206,62 @@ http.createServer(function(req,res){
             let t=Math.min(Math.floor(Math.random()*(lines.length)),lines.length-1);
             res.end(lines[t]);
         }
+        else if(post.mode=="forum"){
+            res.writeHead(200,{"Content-Type":"application/json;charset=utf-8","Access-Control-Allow-Origin":"*"});
+            if(post.type=="upload"){
+                var issue=require("./forum");
+                issue.init('127.0.0.1','root','','Server18');
+                res=issue.upload(post,res,replace);
+                issue.close();
+                res.end();
+            }
+            if(post.type=="getForums"){
+                console.log("getForums");
+                var mysql=require("./MySQLCURD");
+                mysql.init('127.0.0.1','root','','Server18');
+                var data="";
+                mysql.query('Forum','',async function(err,result){
+                    console.log(result);
+                    if(err||!result.length){
+                        console.log("issues empty");
+                        res.end("");
+                        mysql.close();
+                        return;
+                    }
+                    for(var i=0;i<result.length;i++){
+                        console.log(i);
+                        console.log(result);
+                        console.log(result[i]);
+                        let arr=[];
+                        await new Promise(function(r){
+                            console.log(i);
+                            console.log(result[i]);
+                            console.log(result[i].userid);
+                            mysql.query('Users','WHERE id='+result[i].userid,function(err,result2){
+                                console.log(result2);
+                                if(err||!result2.length){
+                                    console.log("user undefined");
+                                }
+                                else{
+                                    console.log(i);
+                                    console.log(result);
+                                    console.log(result[i]);
+                                    let forum=new Object();
+                                    forum.user=result2[0].user;
+                                    forum.content=result[i].issue;
+                                    arr.push(forum);
+                                    // data+='<p class=\"userName\">'+result2[0].user+':</p>';
+                                    // data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
+                                }
+                                r();
+                            });
+                        });
+                    }
+                    res.end(JSON.stringify(arr));
+                    mysql.close();
+                });
+            }
+        }
         else{
             res.writeHead(200,{"Content-Type":"text/plain;charset=utf-8","Access-Control-Allow-Origin":"*"});
             res.end();
