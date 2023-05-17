@@ -4,6 +4,9 @@ function search(){
 	let content=document.getElementById("content").value;
     let id=document.getElementById("id").value;
     document.getElementById("forums").innerHTML="";
+    console.log(user);
+    console.log(content);
+    console.log(id);
     for(let i=0;i<forums.length;i++){
         console.log(forums[i]);
         if(forums[i].user.indexOf(user)!=-1&&forums[i].content.indexOf(content)!=-1&&(forums[i].id==id||id=="")){
