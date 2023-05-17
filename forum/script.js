@@ -5,7 +5,9 @@ function search(){
     let id=document.getElementById("id").value;
     document.getElementById("forums").innerHTML="";
     for(let i=0;i<forums.length;i++){
+        console.log(forums[i]);
         if(forums[i].user.indexOf(user)!=-1&&forums[i].content.indexOf(content)!=-1&&(forums[i].id==id||id=="")){
+            console.log("insert");
             document.getElementById("formus").innerHTML+='<p class=\"userName\">'+forums[i].user+':</p>';
             document.getElementById("formus").innerHTML+='<p class=\"userName\">编号：'+forums[i].id+':</p>';
             document.getElementById("formus").innerHTML+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+forums[i].content+'</div>';
