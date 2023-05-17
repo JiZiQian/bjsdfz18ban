@@ -21,6 +21,7 @@ function getstr(){
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
     ajax.send("mode=forum&type=getForums");
     forums=JSON.parse(ajax.responseText);
+    console.log(forums);
     search();
 }
 function poststr(){
