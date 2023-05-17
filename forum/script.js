@@ -24,13 +24,21 @@ function getstr(){
     search();
 }
 function poststr(){
+    let text=document.getElementById("paragraph").value;
+    if(text.replace(/\s/g,"").length==0){
+        alert("不能发送空消息！");
+        return;
+    }
+    if(signed==false){
+        alert("请先登录！");
+        return;
+    }
     init();
     let ajax;
     if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/json;charset=UTF-8");
-    let text=document.getElementById("paragraph").value;
     var packet=new Object();
     packet.mode="forum";
     packet.text=text;
