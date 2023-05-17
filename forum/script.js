@@ -38,12 +38,12 @@ function poststr(){
     if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
-    ajax.setRequestHeader("Content-type","application/json;charset=UTF-8");
+    ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
     var packet=new Object();
     packet.mode="forum";
     packet.text=text;
     packet.type="upload";
     packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
-    ajax.setRequestHeader("Access-Control-Allow-Headers","*");
-    ajax.send(JSON.stringify(packet));
+    // ajax.setRequestHeader("Access-Control-Allow-Headers","*");
+    ajax.send("mode=forum&text="+text+"&type=upload&userid="+ckie[1].substr(ckie[1].indexOf("=")+1));
 }
