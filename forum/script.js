@@ -1,7 +1,7 @@
 let forums;
 function search(){
 	let user=document.getElementById("userselect").value;
-	let content=document.getElementById("content").value;
+	let content=document.getElementById("contents").value;
     let id=document.getElementById("id").value;
     document.getElementById("forums").innerHTML="";
     console.log(user);
