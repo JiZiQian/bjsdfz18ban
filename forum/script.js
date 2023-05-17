@@ -44,7 +44,6 @@ function poststr(){
     packet.text=text;
     packet.type="upload";
     packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
-    ajaxSub.setRequestHeader("Content-type","application/json");
-    ajaxSub.setRequestHeader("Access-Control-Allow-Headers","*");
-    ajaxSub.send(JSON.stringify(packet));
+    ajax.setRequestHeader("Access-Control-Allow-Headers","*");
+    ajax.send(JSON.stringify(packet));
 }
