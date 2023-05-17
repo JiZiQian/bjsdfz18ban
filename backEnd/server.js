@@ -220,6 +220,7 @@ http.createServer(function(req,res){
                 var mysql=require("./MySQLCURD");
                 mysql.init('127.0.0.1','root','','Server18');
                 var data="";
+                let arr=[];
                 mysql.query('Forum','',async function(err,result){
                     console.log(result);
                     if(err||!result.length){
@@ -232,7 +233,6 @@ http.createServer(function(req,res){
                         console.log(i);
                         console.log(result);
                         console.log(result[i]);
-                        let arr=[];
                         await new Promise(function(r){
                             console.log(i);
                             console.log(result[i]);
@@ -258,6 +258,7 @@ http.createServer(function(req,res){
                             });
                         });
                     }
+                    console.log(arr);
                     res.end(JSON.stringify(arr));
                     mysql.close();
                 });
