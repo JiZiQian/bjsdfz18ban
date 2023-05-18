@@ -5,7 +5,9 @@ function show(){
 }
 function hide(){
     document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\" style=\"position:absolute;top:10px;right:10px;\"></p>";
-    document.getElementById("userName").innerHTML=ckie[0].substr(ckie[0].indexOf("=")+1);
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("User")==-1) i++;
+    document.getElementById("userName").innerHTML=ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function logOut(){
     document.cookie="User=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
