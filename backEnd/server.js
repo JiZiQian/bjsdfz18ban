@@ -251,6 +251,7 @@ http.createServer(function(req,res){
                                     forum.content=result[i].issue;
                                     forum.id=result[i].id;
                                     forum.fa=result[i].fa;
+                                    forum.like=result[i].likes;
                                     arr.push(forum);
                                     // data+='<p class=\"userName\">'+result2[0].user+':</p>';
                                     // data+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\">'+result[i].issue+'</div>';
@@ -262,6 +263,27 @@ http.createServer(function(req,res){
                     console.log(arr);
                     res.end(JSON.stringify(arr));
                     mysql.close();
+                });
+            }
+            if(post.type=="like"){
+                console.log("forum like");
+                var mysql=require("./MySQLCURD");
+                mysql.init('127.0.0.1','root','','Server18');
+                mysql.querySync('Forum','WHERE id='+post.id,function(err,res){
+                    if(err||!res.length){
+                        console.log('error');
+                        return;
+                    }
+                    let like=res[0].likes;
+                    like=like+1;
+                    mysql.update('Forum','likes='+like,'WHERE id='+post.id,function(err,result){
+                        if(err){
+                            console.log('error');
+                            return;
+                        }
+                        res.end();
+                        mysql.close();
+                    });
                 });
             }
         }

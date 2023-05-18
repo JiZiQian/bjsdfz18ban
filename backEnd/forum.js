@@ -12,7 +12,7 @@ exports.upload=function(post,res,replace){
     str=replace(str,"\"","&quot;");
     console.log(str);
     console.log('0,\"'+str+'\",'+post.userid);
-    let t='0,\"'+str+'\",'+post.userid+','+post.fa;
+    let t='0,\"'+str+'\",'+post.userid+','+post.fa+',0';
     t=t.replace(/\\/g,"\\\\");
     mysql.insert('Forum','id,issue,userid,fa',t,function(err,res){
         if(err){

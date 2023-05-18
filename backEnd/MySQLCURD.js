@@ -9,10 +9,19 @@ exports.init=function(hst,usr,pswd,dtbs){
 exports.query=function(table,add,callback){
     connection.query('SELECT * FROM '+table+' '+add,callback);
 };
+exports.querySync=function(table,add,callback){
+    return new Promise(function(resolve,reject){
+        connection.query('SELECT * FROM '+table+' '+add,function(err,res){
+            callback(err,res);
+            if(err) reject('error');
+            else resolve('success');
+        });
+    });
+}
 exports.insert=function(table,title,content,callback){
     connection.query('INSERT INTO '+table+' ('+title+') VALUES ('+content+')',callback);
 };
-exports.update=function(table,content,where,callback){
+exports.update=function(table,content,add,callback){
     connection.query('UPDATE '+table+' SET '+content+' '+add,callback);
 };
 exports.delete=function(table,where,callback){
