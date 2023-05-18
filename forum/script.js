@@ -10,7 +10,7 @@ function _search(user,content,id,fa){
         if(forums[i].user.indexOf(user)!=-1&&forums[i].content.indexOf(content)!=-1&&(forums[i].id==id||id=="")&&(forums[i].fa==fa||forums[i].id==fa)){
             console.log("insert");
             document.getElementById("forums").innerHTML+='<p class=\"userName\">'+forums[i].user+':</p>';
-            document.getElementById("forums").innerHTML+='<button class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\" onclick=\"findComment('+forums[i].id+')\">'+forums[i].content+'</button>';
+            document.getElementById("forums").innerHTML+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\" onclick=\"findComment('+forums[i].id+')\">'+forums[i].content+'</div>';
         }
     }
 }
@@ -63,4 +63,6 @@ function poststr(){
     packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
     // ajax.setRequestHeader("Access-Control-Allow-Headers","*");
     ajax.send("mode=forum&text="+text+"&type=upload&userid="+ckie[1].substr(ckie[1].indexOf("=")+1)+"&fa="+location.href.substr(location.href.indexOf("?fa=")+4));
+    document.getElementById("submit").innerHTML="COMPLETE!";
+    document.getElementById("submit").onclick="";
 }
