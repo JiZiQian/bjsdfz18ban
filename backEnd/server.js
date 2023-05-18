@@ -269,14 +269,14 @@ http.createServer(function(req,res){
                 console.log("forum like");
                 var mysql=require("./MySQLCURD");
                 mysql.init('127.0.0.1','root','','Server18');
-                mysql.querySync('Forum','WHERE id='+post.id,function(err,res){
-                    if(err||!res.length){
+                mysql.querySync('Forum','WHERE id='+post.id,function(err,result){
+                    if(err||!result.length){
                         console.log('error');
                         return;
                     }
-                    let like=res[0].likes;
+                    let like=result[0].likes;
                     like=like+1;
-                    mysql.update('Forum','likes='+like,'WHERE id='+post.id,function(err,result){
+                    mysql.update('Forum','likes='+like,'WHERE id='+post.id,function(err,result2){
                         if(err){
                             console.log('error');
                             return;

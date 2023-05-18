@@ -19,7 +19,9 @@ function check(){
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    ajax.send("mode=users&type=check&user="+ckie[0].substr(ckie[0].indexOf("=")+1));
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("User")==-1) i++;
+    ajax.send("mode=users&type=check&user="+ckie[i].substr(ckie[i].indexOf("=")+1));
     res=ajax.responseText;
     console.log(res);
     if(res=="-1"){
