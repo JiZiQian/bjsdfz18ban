@@ -76,3 +76,21 @@ function like(id){
     ajax.send("mode=forum&type=like&id="+id);
     event.stopPropagation();
 }
+function 随便起(lis,l,r){
+    if(l>=r)return;
+    var i=l,j=r,k=lis[i];
+    while(i<j){
+        while(lis[j]>k&&j>i)j--;
+		lis[i]=lis[j];
+        while(lis[i]<k&&j>i)i++;
+		lis[j]=lis[i];
+        if(j>i){
+            lis[i]^=lis[j];
+            lis[j]^=lis[i];
+            lis[i]^=lis[j];
+        }
+    }
+	lis[i]=k;
+    随便起(lis,l,i-1);
+    随便起(lis,i+1,r);
+}
