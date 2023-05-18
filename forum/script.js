@@ -10,7 +10,7 @@ function _search(user,content,id,fa){
         if(forums[i].user.indexOf(user)!=-1&&forums[i].content.indexOf(content)!=-1&&(forums[i].id==id||id=="")&&(forums[i].fa==fa||forums[i].id==fa)){
             console.log("insert");
             document.getElementById("forums").innerHTML+='<p class=\"userName\">'+forums[i].user+':</p>';
-            document.getElementById("forums").innerHTML+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\" onclick=\"findComment('+forums[i].id+')\"><button onclick=\"like('+forums[i].id+')\">点赞：'+forums[i].likes+'</button><br/>'+forums[i].content+'</div>';
+            document.getElementById("forums").innerHTML+='<div class=\"texts\" style=\"background-color:#f1f1f1;border-width:0px 10px 10px 10px;border-style:solid;border-color:#ffffff;padding:1%;border-radius:25px;text-align:left\" onclick=\"findComment('+forums[i].id+')\"><button onclick=\"like('+forums[i].id+')\">点赞：'+forums[i].like+'</button><br/>'+forums[i].content+'</div>';
         }
     }
 }
@@ -91,11 +91,11 @@ function like(id){
 }
 function sort(lis,l,r){
     if(l>=r)return;
-    var i=l,j=r,k=lis[i].likes;
+    var i=l,j=r,k=lis[i].like;
     while(i<j){
-        while(lis[j].likes>k&&j>i)j--;
+        while(lis[j].like>k&&j>i)j--;
 		lis[i]=lis[j];
-        while(lis[i].likes<k&&j>i)i++;
+        while(lis[i].like<k&&j>i)i++;
 		lis[j]=lis[i];
         if(j>i){
             let t=lis[j];
