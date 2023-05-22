@@ -146,6 +146,15 @@
 		</div>
 	</div>
     <script>
+		function replace(str,to,fd){
+		    let i=0;
+		    while(str.indexOf(fd,i)!=-1){
+		        let t=str.indexOf(fd,i)+to.length;
+		        str=str.substr(0,str.indexOf(fd,i))+to+str.substr(str.indexOf(fd,i)+fd.length);
+		        i=t;
+		    }
+		    return str;
+		}
 		init();
 		showdown.setOption('simpleLineBreaks', true);
 		showdown.setOption('literalMidWordUnderscores', true);
@@ -164,6 +173,14 @@
 				console.log(blog);
 				let title=blog[0].title;
 				let content=blog[0].blog;
+				title=replace(title,"\'","&#39;");
+                title=replace(title,"\"","&quot;");
+                title=replace(title,"<","&lt;");
+                title=replace(title,">","&gt;");
+				content=replace(content,"\'","&#39;");
+                content=replace(content,"\"","&quot;");
+                content=replace(content,"<","&lt;");
+                content=replace(content,">","&gt;");
 				document.getElementById("content").innerHTML="<h1>"+title+"</h1><br/>";
 				let converter=new showdown.Converter();
 				content=converter.makeHtml(content);
