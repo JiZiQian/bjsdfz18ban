@@ -32,15 +32,11 @@
 			let ajaxSub;
 			if(window.XMLHttpRequest) ajaxSub=new XMLHttpRequest();
 			else ajaxSub=new ActiveXObject("Microsoft.XMLHTTP");
-			var packet=new Object();
-			packet.mode="issue";
-			packet.text=text;
-			packet.type="upload";
-			packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
+			text=encodeURIComponent(text);
 			ajaxSub.open("POST",httpBackEnd,false);
-			ajaxSub.setRequestHeader("Content-type","application/json");
+			ajaxSub.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			ajaxSub.setRequestHeader("Access-Control-Allow-Headers","*");
-			ajaxSub.send(JSON.stringify(packet));
+			ajaxSub.send("mode=issue&type=upload&text="+text+"userid="+ckie[1].substr(ckie[1].indexOf("=")+1));
 			document.getElementById("text").value="";
 			document.getElementById("text").rows=2;
 			getIssues();
