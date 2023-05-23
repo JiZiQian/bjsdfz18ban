@@ -5,7 +5,8 @@ function show(){
 }
 function hide(){
     document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\" style=\"position:absolute;top:10px;right:10px;\"></p>";
-    https://m0e9kz1zqrw5shsh3.neiwangyun.net
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("User")==-1) i++;
     document.getElementById("userName").innerHTML=ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function logOut(){
