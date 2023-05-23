@@ -57,17 +57,15 @@ function poststr(){
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
-    var packet=new Object();
-    packet.mode="forum";
-    packet.text=text;
-    packet.type="upload";
-    packet.userid=ckie[1].substr(ckie[1].indexOf("=")+1);
-    // ajax.setRequestHeader("Access-Control-Allow-Headers","*");
-    ajax.send("mode=forum&text="+text+"&type=upload&userid="+ckie[1].substr(ckie[1].indexOf("=")+1)+"&fa="+location.href.substr(location.href.indexOf("?fa=")+4));
+    text=encodeURIComponent(text);
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("uid")==-1) i++;
+    ajax.send("mode=forum&text="+text+"&type=upload&userid="+ckie[i].substr(ckie[i].indexOf("=")+1)+"&fa="+location.href.substr(location.href.indexOf("?fa=")+4));
     document.getElementById("submit").innerHTML="COMPLETE!";
     document.getElementById("submit").onclick="";
 }
 function like(id){
+    event.stopPropagation();
     init();
     if(signed==false){
         alert("请先登录！");
@@ -87,7 +85,6 @@ function like(id){
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
     ajax.send("mode=forum&type=like&id="+id);
-    event.stopPropagation();
 }
 function sort(lis,l,r){
     if(l>=r)return;
