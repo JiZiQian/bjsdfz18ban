@@ -77,19 +77,20 @@ function like(id){
         return;
     }
     let ckie=document.cookie.split(';');
-    if(ckie.find(function(a){return a==id})){
+    if(ckie.find(function(a){return a==id+"="+id})){
         alert("请不要再一个月内重复点赞！");
         return;
     }
     let d=new Date();
     d.setTime(d.getTime()+(30*24*60*60*1000));
-    document.cookie=id+";expires="+d.toGMTString();
+    document.cookie=id+"="+id+";expires="+d.toGMTString();
     let ajax;
     if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
     ajax.send("mode=forum&type=like&id="+id);
+    history.go(0);
 }
 function sort(lis,l,r){
     if(l>=r)return;
