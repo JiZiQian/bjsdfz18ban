@@ -34,7 +34,7 @@ function getstr(){
     if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     console.log(httpBackEnd);
-    ajax.onlaod=function(){
+    ajax.onreadystatechange=function(){
         console.log(ajax.responseText);
         forums=JSON.parse(ajax.responseText);
         sort(forums,0,forums.length-1);
