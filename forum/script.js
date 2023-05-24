@@ -35,6 +35,7 @@ function getstr(){
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     console.log(httpBackEnd);
     ajax.onlaod=function(){
+        console.log(ajax.responseText);
         forums=JSON.parse(ajax.responseText);
         sort(forums,0,forums.length-1);
         console.log(forums);
