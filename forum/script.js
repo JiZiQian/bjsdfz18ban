@@ -37,6 +37,7 @@ function getstr(){
     ajax.onreadystatechange=function(){
         console.log(ajax.responseText);
         forums=JSON.parse(ajax.responseText);
+        console.log(forums);
         sort(forums,0,forums.length-1);
         console.log(forums);
         _search("","","",0);
