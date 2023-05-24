@@ -39,6 +39,7 @@ function getstr(){
         console.log(forums);
         _search("","","",0);
     }
+    console.log(httpBackEnd);
     ajax.open("POST",httpBackEnd,true);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
     ajax.send("mode=forum&type=getForums");
