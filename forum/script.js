@@ -38,7 +38,7 @@ function getstr(){
         console.log(ajax.responseText);
         forums=JSON.parse(ajax.responseText);
         console.log(forums);
-        // sort(forums,0,forums.length-1);
+        forums.sort(function(a,b){return b.like-a.like});
         console.log(forums);
         _search("","","",0);
     }
@@ -91,22 +91,4 @@ function like(id){
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8");
     ajax.send("mode=forum&type=like&id="+id);
     history.go(0);
-}
-function sort(lis,l,r){
-    if(l>=r)return;
-    var i=l,j=r,k=lis[i].like;
-    while(i<j){
-        while(lis[j].like>k&&j>i)j--;
-		lis[i]=lis[j];
-        while(lis[i].like<k&&j>i)i++;
-		lis[j]=lis[i];
-        if(j>i){
-            let t=lis[j];
-            lis[j]=lis[i];
-            lis[i]=t;
-        }
-    }
-	lis[i]=k;
-    sort(lis,l,i-1);
-    sort(lis,i+1,r);
 }
