@@ -49,13 +49,13 @@
             let d=new Date();
             d.setTime(d.getTime()+2592000000);//2592000000 : 30 days
             let add=";expires="+d.toGMTString()+";path=/"
-            document.cookie="User="+res.substr(res.indexOf(" ")+1)+add;
+            document.cookie="token="+res.substr(res.indexOf(" ")+1)+add;
             document.cookie="uid="+res.substr(0,res.indexOf(" "))+add;
             window.location.assign("https://jiziqian.github.io/bjsdfz18ban");
         }
         function checkN(){
             let add=";path=/"
-            document.cookie="User="+res.substr(res.indexOf(" ")+1)+add;
+            document.cookie="token="+res.substr(res.indexOf(" ")+1)+add;
             document.cookie="uid="+res.substr(0,res.indexOf(" "))+add;
             window.location.assign("https://jiziqian.github.io/bjsdfz18ban");
         }

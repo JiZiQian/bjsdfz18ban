@@ -71,52 +71,8 @@ http.createServer(function(req,res){
             }
         }
         else if(post.mode=="users"){
-            res.writeHead(200,{"Content-Type":"text/plain;charset=utf-8","Access-Control-Allow-Origin":"*"});
-            var mysql=require("./MySQLCURD");
-            mysql.init('127.0.0.1','root','','Server18');
-            if(post.type=="signUp"){
-                mysql.query('Users','WHERE user=\"'+post.user+'\"',function(err,result){
-                    console.log(result);
-                    if(err||!result.length){
-                        mysql.insert('Users','id,user,pswd','0,\"'+post.user+'\",\"'+post.password+'\"',function(err,result2){
-                            if(err){
-                                console.log("error "+err.message);
-                                return;
-                            }
-                            res.end("注册成功！");
-                            mysql.close();
-                        });
-                    }
-                    else{
-                        res.end("失败：用户已存在");
-                        mysql.close();
-                    }
-                });
-            }
-            if(post.type=="signIn"){
-                mysql.query('Users','WHERE user=\"'+post.user+'\" AND pswd=\"'+post.password+'\"',function(err,result){
-                    console.log(result);
-                    if(err||!result.length){
-                        res.end("-1");
-                    }
-                    else{
-                        res.end(result[0].id+" "+result[0].user);
-                    }
-                    mysql.close();
-                })
-            }
-            if(post.type=="check"){
-                mysql.query('Users','WHERE user=\"'+post.user+'\"',function(err,result){
-                    console.log(result);
-                    if(err||!result.length){
-                        res.end("-1");
-                    }
-                    else{
-                        res.end("1");
-                    }
-                    mysql.close();
-                })
-            }
+            let user=require('./user');
+            user.main(post,res);
         }
         else if(post.mode=="blog"){
             res.writeHead(200,{"Content-Type":"application/json;charset=utf-8","Access-Control-Allow-Origin":"*"});
@@ -276,7 +232,7 @@ http.createServer(function(req,res){
                     }
                     let like=result[0].likes;
                     like=like+1;
-                    mysql.update('Forum','likes='+like,'WHERE id='+post.id,function(err,result2){
+                    mysql.update2('Forum','likes='+like,'WHERE id='+post.id,function(err,result2){
                         if(err){
                             console.log('error');
                             return;

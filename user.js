@@ -6,7 +6,7 @@ function show(){
 function hide(){
     document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\" style=\"position:absolute;top:10px;right:10px;\"></p>";
     let i=0;
-    while(i<ckie.length&&ckie[i].indexOf("User")==-1) i++;
+    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
     document.getElementById("userName").innerHTML=ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function logOut(){
@@ -22,7 +22,7 @@ function check(){
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     let i=0;
-    while(i<ckie.length&&ckie[i].indexOf("User")==-1) i++;
+    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
     ajax.send("mode=users&type=check&user="+ckie[i].substr(ckie[i].indexOf("=")+1));
     res=ajax.responseText;
     console.log(res);
@@ -43,4 +43,14 @@ function userInit(){
         signed=true;
         hide();
     }
+}
+function getckieuid(){
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("uid")==-1) i++;
+    return ckie[i].substr(ckie[i].indexOf("=")+1);
+}
+function getckietoken(){
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
+    return ckie[i].substr(ckie[i].indexOf("=")+1);
 }
