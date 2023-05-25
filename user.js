@@ -1,5 +1,15 @@
 let ckie=document.cookie.split(";");
 let signed;
+function getckieuid(){
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("uid")==-1) i++;
+    return ckie[i].substr(ckie[i].indexOf("=")+1);
+}
+function getckietoken(){
+    let i=0;
+    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
+    return ckie[i].substr(ckie[i].indexOf("=")+1);
+}
 function show(){
     document.getElementById("user").innerHTML="<button id=\"userName\" class=\"userName\" onclick=\"logOut()\" onmouseout=\"hide()\" style=\"height:auto;width:auto;position:absolute;top:10px;right:10px;\">登出</button>";
 }
@@ -21,9 +31,7 @@ function check(){
     else ajax=new ActiveXObject("Microsoft.XMLHTTP");
     ajax.open("POST",httpBackEnd,false);
     ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    let i=0;
-    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
-    ajax.send("mode=users&type=check&user="+ckie[i].substr(ckie[i].indexOf("=")+1));
+    ajax.send("mode=users&type=check&token="+getckietoken()+"&id="+getckieuid());
     res=ajax.responseText;
     console.log(res);
     if(res=="-1"){
@@ -43,14 +51,4 @@ function userInit(){
         signed=true;
         hide();
     }
-}
-function getckieuid(){
-    let i=0;
-    while(i<ckie.length&&ckie[i].indexOf("uid")==-1) i++;
-    return ckie[i].substr(ckie[i].indexOf("=")+1);
-}
-function getckietoken(){
-    let i=0;
-    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
-    return ckie[i].substr(ckie[i].indexOf("=")+1);
 }
