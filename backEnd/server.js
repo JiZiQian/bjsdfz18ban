@@ -1,3 +1,4 @@
+process.on('uncaughtException',function(err){console.log(err);})
 var http=require("http");
 var querystring = require('querystring');
 const { markAsUntransferable } = require("worker_threads");

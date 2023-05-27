@@ -48,15 +48,18 @@ exports.main=function(post,res){
         })
     }
     if(post.type=="check"){
-        mysql.query('UserToken','WHERE id=\"'+post.id+'\" AND token='+post.token,function(err,result){
+        mysql.query('UserToken','WHERE id='+post.id+' AND token='+post.token,function(err,result){
             console.log(result);
             if(err||!result.length){
                 res.end("-1");
+                mysql.close();
             }
             else{
-                res.end("1");
+                mysql.query('Users','WHERE id='+post.id,function(err,result2){
+                    res.end(result2[0].user);
+                    mysql.close();
+                });
             }
-            mysql.close();
         })
     }
 }

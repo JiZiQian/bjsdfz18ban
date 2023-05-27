@@ -1,13 +1,16 @@
 let ckie=document.cookie.split(";");
 let signed;
+let usrname;
 function getckieuid(){
     let i=0;
     while(i<ckie.length&&ckie[i].indexOf("uid")==-1) i++;
+    if(ckie[i].indexOf("uid")==-1) return "";
     return ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function getckietoken(){
     let i=0;
     while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
+    if(ckie[i].indexOf("token")==-1) return "";
     return ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function show(){
@@ -15,9 +18,7 @@ function show(){
 }
 function hide(){
     document.getElementById("user").innerHTML="<p id=\"userName\" class=\"userName\" onmouseover=\"show()\" style=\"position:absolute;top:10px;right:10px;\"></p>";
-    let i=0;
-    while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
-    document.getElementById("userName").innerHTML=ckie[i].substr(ckie[i].indexOf("=")+1);
+    document.getElementById("userName").innerHTML=usrname;
 }
 function logOut(){
     document.cookie="User=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
@@ -25,6 +26,7 @@ function logOut(){
     window.location.reload();
 }
 function check(){
+    if(getckietoken()==""||getckieuid()=="") return false;
     init();
     let ajax;
     if(window.XMLHttpRequest) ajax=new XMLHttpRequest();
@@ -38,6 +40,7 @@ function check(){
         return false;
     }
     else{
+        username=res;
         return true;
     }
 }
