@@ -40,7 +40,7 @@ function check(){
         return false;
     }
     else{
-        username=res;
+        usrname=res;
         return true;
     }
 }
