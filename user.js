@@ -4,13 +4,13 @@ let usrname;
 function getckieuid(){
     let i=0;
     while(i<ckie.length&&ckie[i].indexOf("uid")==-1) i++;
-    if(ckie[i].indexOf("uid")==-1) return "";
+    if(i>=ckie.length) return "";
     return ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function getckietoken(){
     let i=0;
     while(i<ckie.length&&ckie[i].indexOf("token")==-1) i++;
-    if(ckie[i].indexOf("token")==-1) return "";
+    if(i>=ckie.length) return "";
     return ckie[i].substr(ckie[i].indexOf("=")+1);
 }
 function show(){
