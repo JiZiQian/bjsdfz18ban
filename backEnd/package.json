@@ -1,0 +1,12 @@
+{
+  "name": "backend18",
+  "version": "1.0.0",
+  "description": "+ 安装nodejs，mysql + 为nodejs安装mysql库 + 在mysql中创建数据库：Server18 + 在mysql数据库Server18中添加数据表： ```SQL CREATE TABLE Issues(id INT UNSIGNED AUTO_INCREMENT,issue LONGTEXT NOT NULL,userid INT UNSIGNED,PRIMARY KEY (id))ENGINE=InnoDB DEFAULT CHARSET=utf8; CREATE TABLE Users(id INT UNSIGNED AUTO_INCREMENT,user LONGTEXT NOT NULL,pswd LONGTEXT NOT NULL,PRIMARY KEY (id))ENGINE=InnoDB DEFAULT CHARSET=utf8; CREATE TABLE Blogs(id INT UNSIGNED AUTO_INCREMENT,title LONGTEXT NOT NULL,blog LONGTEXT NOT NULL,userid INT UNSIGNED,PRIMARY KEY (id))ENGINE=InnoDB DEFAULT CHARSET=utf8; CREATE TABLE Forum(id INT UNSIGNED AUTO_INCREMENT,issue LONGTEXT NOT NULL,userid INT UNSIGNED,fa INT UNSIGNED,likes INT UNSIGNED,PRIMARY KEY (id))ENGINE=InnoDB DEFAULT CHARSET=utf8; CREATE TABLE UserToken(id INT UNSIGNED,token INT UNSIGNED,PRIMARY KEY (id))ENGINE=InnoDB DEFAULT CHARSET=utf8; ``` + 准备制作users",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
